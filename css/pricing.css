@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+nav ul li a:hover{
+    text-decoration: underline;
+    scale: 1.1;
+}
+nav ul li a img:hover{
+    border: 5px solid #ffffff;
+    scale: 1.1;
+}

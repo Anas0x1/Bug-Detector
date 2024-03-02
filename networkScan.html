@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scanner</title>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="css/networkScanner.css">
+</head>
+<body style="  background-image: url('image/rainbow-vortex.png');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: 100% 100%;">
+
+
+<div class="container">
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" style=" background-image: url('image/rainbow-vortex.png')">
+        <div class="container">
+          <a class="navbar-brand text-white" href="home.html">BugDetector</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="home.html" target="blank">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="scanner.html">Scanner</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="blogs.html">Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="pricing.html">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="contect-us.html">Contact us</a>
+              </li>
+               <li>
+                <a href=""><img src="image/user.png" alt="user-logo" style="width: 50px; height: 50px; border-radius: 50%; margin-left: 400px;"></a>
+               </li>
+              
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row" style="margin-top: 150px;margin-bottom: 100px;">
+      <h3 style="color: aliceblue;">Network Scanner</h3>
+    </div>
+  </div>
+
+  
+<div class="container">
+    <h4 style="color: aliceblue;">Enter Target</h4>
+    <div class="input-group mb-3 group" >
+        <input type="text"  placeholder="Enter Domain , IP , list of IP ,CIDR" id="input" class="input-url">
+        <div class="input-group-append" style="margin-left: 10px;">
+            <button type="button" class="btn btn-success" id="btn-scan">Scan <i class="fa-solid fa-angles-right"></i></button>
+        </div>
+        <div class="input-group-append" style="margin-left: 10px;">
+            <!-- <button type="button" class="btn btn-success" id="btn-schedule">Schedule <i class="fa-solid fa-clock"></i></button> -->
+            <!-- Button trigger modal -->
+<button type="button"  class="btn btn-success" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Schedule <i class="fa-regular fa-clock"></i>
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Schedule</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                  <label><input type="radio" name="schedule" value="one-time" checked> One time</label><br>
+                  <label><input type="radio" name="schedule" value="daily"> Daily</label><br>
+                  <label><input type="radio" name="schedule" value="weekly"> Weekly</label><br>
+                  <label><input type="radio" name="schedule" value="monthly"> Monthly</label><br>
+                </fieldset>
+            
+                <hr>
+                
+                <label for="start-time" >Start Time:</label><br>
+                <input type="time" id="start-time" name="start-time" value="11:35" step="1800" ><br>
+                <br>
+                <label for="start-date" >Date:</label><br>
+                <input type="date" id="start-date" name="start-date" value="2022-12-23" >
+                <br>
+                <hr>
+                <fieldset>
+                  <legend>Email Notification</legend>
+                  <label><input type="checkbox" name="email-notification" value="email-results" checked > Email results</label><br>
+                  <label><input type="checkbox" name="email-notification" value="do-not-email-results" > Do not email results</label><br>
+                </fieldset>
+            
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+          </div>
+      </div>
+</div>
+
+<!-- 
+<div class="container">
+  
+</div> -->
+
+<!-- scan data  -->
+<!-- color of the container will be changed -->
+<div class="container" id="show-scan">
+
+</div>
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="bg-body-tertiary text-center">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-facebook-f" style="color: aliceblue;"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-twitter" style="color: aliceblue;"></i
+        ></a>
+  
+        <!-- Google -->
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-google" style="color: aliceblue;"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-instagram" style="color: aliceblue;"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-linkedin-in" style="color: aliceblue;"></i
+        ></a>
+  
+        <!-- Github -->
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-github" style="color: aliceblue;"></i
+        ></a>
+      </section>
+    
+     
+  </footer>
+
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/networkScanner.js"></script>
+</body>
+</html>
