@@ -51,8 +51,40 @@ background-size: 100% 100%;">
 </div>
 
 <div class="container search-input" >
-   <input type="text" placeholder="Search">
-   <button class="btn btn-success"><i class="fa-solid fa-plus"></i> Add blog</button>
+   <input type="text" placeholder="Search" id="search-on-blogs">
+
+
+
+  <!-- Button trigger modal -->
+<buttontype="button" class="btn btn-success" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#staticBackdrop" id="add-blog-btn">
+    <i class="fa-solid fa-plus"></i> Add blog
+  </button>
+  
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-mdb-backdrop="static"
+    data-mdb-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">...</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-mdb-ripple-init>Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </div>
 
 
@@ -60,24 +92,22 @@ background-size: 100% 100%;">
     <div class="row">
             <div class="col-sm-3 mt-2 mb-2">
                 <div class="card p-2" >
-                    <img class="card-img-top" src="image/background.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="" alt="image">
                   
                         <h6 class="card-text text-center mt-2 mb-2" >
-                            breaking down the five most SQL injection threats
+                            
                         </h6>
                         
                     
                     <p class="card-text text-center mt-2 mb-2">
-                        jdjsjhadkjhsdjkhaskjhsdkjhksjhdjkhkdhjsjkdsjkdkjsakjdkjsjdajkdkjajkdwjhjwhjkdhwjkdjhk\]darkad
-                        addjhajhdgjh
-                        ajdajdhja
+                       
                     </p>
 
 
                     <div style="display: flex;justify-content: space-between; margin-top: 10px;">
                       
-                        <small> <img src="image/user.png" alt="uers" style="width: 30px;height: 30px;"> username</small>
-                        <small>#tage</small>
+                        <small> <img src="image/user.png" alt="uers" style="width: 30px;height: 30px;"></small>
+                        <small></small>
                     </div>
                     <div class="likes">
 
