@@ -55,35 +55,58 @@ background-size: 100% 100%;">
 
 
 
-  <!-- Button trigger modal -->
-<buttontype="button" class="btn btn-success" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#staticBackdrop" id="add-blog-btn">
-    <i class="fa-solid fa-plus"></i> Add blog
+
+
+
+
+
+   <button type="button"  class="btn btn-success" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal" id="add-blog-btn"><i class="fa-solid fa-plus"></i>
+   Add Blog 
   </button>
   
   <!-- Modal -->
-  <div
-    class="modal fade"
-    id="staticBackdrop"
-    data-mdb-backdrop="static"
-    data-mdb-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Creat a new blog</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">...</div>
+
+        <div class="modal-body">
+         
+          <label for="exampleFormControlInput1">Title</label>
+         <input type="text" class="form-control" id="exampleFormControlInput1" style="margin-top: 10px; border: 2px solid rgba(0, 0, 0, 0.13);" required >
+          
+        </div>
+
+        <div class="modal-body">
+         
+          <label for="exampleFormControlTextarea1"><small>Content</small></label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="margin-top: 10px; border: 2px solid rgba(0, 0, 0, 0.13);" required></textarea>
+        </div>
+
+        
+       
+
+        <div class="modal-body">
+         
+          <label for="exampleFormControlInput2" >Tag</label>
+         <input type="text" class="form-control" id="exampleFormControlInput2"style="margin-top: 10px; border: 2px solid rgba(0, 0, 0, 0.13);" required  >
+        </div>
+
+        <div class="modal-body">
+          <label for="exampleFormControlFile1"><small>Insert img</small></label>
+          <small><input type="file" class="form-control-file" id="exampleFormControlFile1" ></small>
+        </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-mdb-ripple-init>Understood</button>
+      
+          <button type="button" class="btn btn-success p-2"><small>Publish</small></button>
         </div>
       </div>
     </div>
   </div>
+  
   
 </div>
 

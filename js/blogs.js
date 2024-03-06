@@ -1,5 +1,6 @@
-let add_blog_btn=document.getElementById('add-blog-btn');
-let search_on_blogs=document.getElementById('search-on-blogs');
-
+let exampleFormControlInput1=document.getElementById('exampleFormControlInput1');
+let exampleFormControlTextarea1=document.getElementById('exampleFormControlTextarea1');
+let exampleFormControlInput2=document.getElementById('exampleFormControlInput2');
+let exampleFormControlFile1=document.getElementById('exampleFormControlFile1');
 
 
