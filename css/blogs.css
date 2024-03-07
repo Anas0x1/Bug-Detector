@@ -35,3 +35,6 @@ footer
     border-radius: 10px;
     padding: 10px;
 }
+.colo:hover{
+    scale: 1.1;
+}
