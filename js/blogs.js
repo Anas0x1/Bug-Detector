@@ -5,33 +5,8 @@ let exampleFormControlTextarea1=document.getElementById('exampleFormControlTexta
 let exampleFormControlInput2=document.getElementById('exampleFormControlInput2');
 let exampleFormControlFile1=document.getElementById('exampleFormControlFile1');
 let Publish_btn=document.getElementById('Publish-btn');
-
-
-let index=0;
-let blogs=[];
-Publish_btn.addEventListener('click',function(){
-
-let New_blog={
-
-title:exampleFormControlInput1.value,
-content:exampleFormControlTextarea1.value,
-tag:exampleFormControlInput2.value,
-img:exampleFormControlFile1.value,
-
-};
-
-blogs[index++]=New_blog;
-localStorage.setItem('blogs',JSON.stringify(blogs));
-exampleFormControlInput1.value='';
-exampleFormControlTextarea1.value='';
-exampleFormControlInput2.value='';
-exampleFormControlFile1.value='';
-show_Blogs();
-});
-
-
-
- function show_Blogs ()
+let blogs=localStorage.blogs;
+function show_Blogs ()
 {
  let data="";
  for(let i=0;i<blogs.length;i++)
@@ -63,4 +38,30 @@ show_Blogs();
  document.getElementById('blogs').innerHTML=data;
 
 }
+
+Publish_btn.addEventListener('click',function(){
+   
+let New_blog={
+
+title:exampleFormControlInput1.value,
+content:exampleFormControlTextarea1.value,
+tag:exampleFormControlInput2.value,
+img:exampleFormControlFile1.value,
+
+};
+
+blogs.push(New_blog);
+localStorage.setItem('blogs',JSON.stringify(blogs));
+exampleFormControlInput1.value='';
+exampleFormControlTextarea1.value='';
+exampleFormControlInput2.value='';
+exampleFormControlFile1.value='';
 show_Blogs();
+
+});
+show_Blogs();
+
+
+
+
+ 
