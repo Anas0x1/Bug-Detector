@@ -169,7 +169,7 @@ validate_domain() {
 
 
 # Get user input
-read -p "Enter a domain or subdomain: " input
+input=$1
 
 # Call the function to validate the input
 validate_domain "$input"
