@@ -13,8 +13,8 @@ chmod +x setup.sh
 Domain free web scan
 ```
 cd scanning/web
-chmod +x free.sh
-./free.sh
+chmod +x domain_free.sh
+./domain_free.sh {YOUR_TARGET}
 ```
 ![free0](https://github.com/0x0anas/Bug-Detector/assets/78263620/c7c6f738-53a4-4123-b67a-ff714efcca95)
 
