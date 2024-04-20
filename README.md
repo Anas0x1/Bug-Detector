@@ -16,9 +16,10 @@ cd scanning/web
 chmod +x free.sh
 ./free.sh
 ```
-![photo_5839464147715211069_w](https://github.com/0x0anas/Bug-Detector/assets/78263620/95eb3051-c993-46e6-931b-57a2693f196a)
+![free0](https://github.com/0x0anas/Bug-Detector/assets/78263620/c7c6f738-53a4-4123-b67a-ff714efcca95)
 
-![photo_5839464147715211072_w](https://github.com/0x0anas/Bug-Detector/assets/78263620/0d47192f-de22-4500-b286-4301c7758bbe)
+![free1](https://github.com/0x0anas/Bug-Detector/assets/78263620/8b54a72a-04a8-4b52-b7bc-509eea6955f7)
 
-![photo_5839464147715211071_w](https://github.com/0x0anas/Bug-Detector/assets/78263620/7d6ce375-94cd-4eb7-baaa-6ab7903e35c5)
+![free3](https://github.com/0x0anas/Bug-Detector/assets/78263620/7904a60e-dd5a-4eed-b12b-296bcc2a6118)
+
 
