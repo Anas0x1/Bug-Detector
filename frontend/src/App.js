@@ -9,14 +9,14 @@ import Blogs from "./components/blogs/Blogs";
 import Pricing from "./components/pricing/Pricing";
 import Login from "./components/login/Login";
 import Sign from "./components/sign/Sign";
+import Try from "./Try";
 
 
 
 function App() {
   return (
     <div classNameName="App">
-      <Nav/>
-      <Home/>
+     <Try/>
     </div>
   );
 }
