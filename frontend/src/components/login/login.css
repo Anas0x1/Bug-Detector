@@ -1,0 +1,175 @@
+
+.main-login {
+    width: 100vw; /* vw: porcentagem da largura da sua viewport(tela) */
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center; /* centraliza no eixo x */
+    align-items: center;
+}
+
+.left-login {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* centraliza no eixo x */
+    align-items: center;
+    flex-direction: column;
+}
+
+.left-login > h1 { /* Todos h1 dentro da div left-login */
+    font-size: 3vw;
+    color: #ffffff;
+}
+
+.left-login-image {
+    width: 35vw;
+}
+
+.right-login {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* centraliza no eixo x */
+    align-items: center;
+}
+
+.card-login {
+    width: 60%; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px; 
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056; 
+}
+
+.card-login > h1 { /* pega todos h1 dentro da div .card-login */
+    color:#ffffff;
+    font-weight: 800;
+    margin: 0;
+}
+
+.textfield {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.textfield > input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: #514869;
+    color: #f0ffffde;
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.textfield > label {
+    color: #f0ffffde;
+    margin-bottom: 10px;
+}
+
+.textfield > input::placeholder {
+    color: #f0ffff94;
+}
+
+.btn-login {
+    width: 70%;
+    height: 50px;
+
+    margin: 25px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #2b134b;
+    background:#ffffff;
+    cursor: pointer;
+    padding: auto;
+ 
+   
+}
+.log-in-another{
+    display: flex;
+    gap: 20px;
+}
+.log-in-another button{
+ width:50%;
+ outline: none;
+ border: none;
+ color: #2b134b;
+ font-weight: 500;
+}
+
+.btn-cadastre-se {
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.btn-cadastre-se:hover{
+  cursor: pointer;
+}
+.span-cadastre-se {
+    color:#ffffff;
+}
+
+@media only screen and (max-width: 950px) {
+    .card-login {
+        width: 85%;
+    }
+}
+.new-users{ margin-top: 10px;}
+.new-users span{
+    margin-top: 10px;
+    color: #ffffff;
+
+}
+.new-users span:hover{
+    cursor: pointer;
+    font-weight:600;
+}
+
+@media only screen and (max-width: 600px) {
+    .main-login {
+        flex-direction: column;
+        padding-bottom: 30px;
+    }
+
+    .left-login > h1 {
+        display: none;
+    }
+
+    .left-login {
+        width: 100%;
+        height: auto;
+    }
+
+    .right-login {
+        width: 100%;
+        height: auto;
+    }
+
+    .left-login-image {
+        width: 50vw;
+    }
+
+    .card-login {
+        width: 90%;
+    }
+
+    .btn-plus {
+        width: 100%;
+    }
+}

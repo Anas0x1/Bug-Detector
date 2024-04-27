@@ -1,0 +1,25 @@
+.container .group .input-url
+{
+    width:50%;
+    border: none;
+    outline:none;
+    border-radius: 10px;
+    padding: 6px;
+    
+}
+.container .group .input-url:focus
+{
+    border: solid 3px #da3535;
+}
+#show-scan{
+    height:100px;
+    width: 50%;
+    margin-left: 8%;
+    color:aliceblue;
+    padding: 5px;
+    background-color:#da3535;
+   display: none;
+}
+span{
+    font-weight: 100;
+}

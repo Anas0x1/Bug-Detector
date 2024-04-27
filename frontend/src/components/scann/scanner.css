@@ -1,0 +1,77 @@
+
+
+
+.network .dec-network a:hover{
+    font-size: larger;
+}
+.web .dec-web a:hover{
+    font-size: larger;
+}
+.sourcecode  .dec-code a:hover{
+    font-size: larger;
+}  
+
+
+  .web  {
+    animation: translateXweb 2s ease-in-out ;
+    
+  }
+  .network{
+    animation: translateXnetwork 2s ease-in-out ;
+  }
+  .sourcecode{
+    animation: translateXcode 2s ease-in-out ;
+  }
+  .web .dec-web ,.network .dec-network,.sourcecode  .dec-code {
+    
+    animation: fadeIn 2s ;
+  }
+
+  @keyframes translateXweb {
+    0% {
+      transform: translateX(0px);
+      opacity: 0;
+    }
+    100% {
+        opacity: 1;
+      transform: translateX(-30px);
+    }
+  }
+  @keyframes translateXcode {
+    0% {
+      transform: translateX(0px);
+      opacity: 0;
+    }
+    100% {
+        opacity: 1;
+      transform: translateX(30px);
+    }
+  }
+  @keyframes translateXnetwork {
+    0% {
+      transform: translateX(0px);
+      opacity: 0;
+    }
+    100% {
+        opacity: 1;
+      transform: translateX(30px);
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    25%{
+        opacity: 0.25;
+    }
+    25%{
+        opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+
+ 
+ 
