@@ -1,0 +1,8 @@
+#exampleFormControlTextarea2,#exampleFormControlTextarea1 {
+    font-family: monospace; /* Use a monospaced font */
+    white-space: pre-wrap; /* Preserve line breaks and spaces */
+    padding: 10px; /* Add some padding for readability */
+    border: 1px solid #ccc; /* Add a border for visual distinction */
+  
+    
+}

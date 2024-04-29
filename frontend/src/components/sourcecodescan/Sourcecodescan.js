@@ -8,7 +8,7 @@ export default function Sourcecodescan() {
         <div className="col-md-6 col-sm-12">
           <div class="mb-3">
             <label
-              for="exampleFormControlTextarea1"
+              for="exampleFormControlTextarea2"
               class="form-label"
               style={{ color: "white" }}
             >
@@ -16,26 +16,17 @@ export default function Sourcecodescan() {
             </label>
             <textarea style={{height:"300px"}}
               class="form-control"
-              id="exampleFormControlTextarea1"
+              id="exampleFormControlTextarea2"
               rows="3"
             ></textarea>
           </div>
+          <div class="mb-3">
+
+  <input className="form-control form-control-sm" id="formFileSm" type="file"/>
+</div>
         </div>
         <div className="col-md-6 col-sm-12">
-          <div class="mb-2">
-            <label
-              for="exampleFormControlTextarea1"
-              class="form-label"
-              style={{ color: "white",  marginTop:"5px"}}
-            >
-              input :
-            </label>
-            <textarea
-              class="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-            ></textarea>
-          </div>
+         
           <div class="mb-2">
             <label
               for="exampleFormControlTextarea1"
@@ -48,6 +39,7 @@ export default function Sourcecodescan() {
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
+              style={{height:"300px"}}
             ></textarea>
           </div>
         </div>
