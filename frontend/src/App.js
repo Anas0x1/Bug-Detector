@@ -1,22 +1,33 @@
-import Home from "./components/home/Home";
-import Nav from "./components/navbar/Nav";
-import { Route,Routes,Switch } from "react-router-dom";
-import Scanner from "./components/scann/Scanner";
-import Webscan from "./components/webscan/Webscan";
-import Networkscan from "./components/networkscan/Networkscan";
-import Contect from "./components/contectus/Contect";
-import Blogs from "./components/blogs/Blogs";
-import Pricing from "./components/pricing/Pricing";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Sign from "./components/sign/Sign";
-import Try from "./Try";
-
-
-
+import Scan from "./pages/Scan";
+import PricingPage from "./pages/PricingPage";
+import ContectUsPage from "./pages/ContectUsPage";
+import BlogsPage from "./pages/BlogsPage";
+import Networkpage from "./pages/Networkpage";
+import Webpage from "./pages/Webpage";
+import Sourcecode from "./pages/Sourcecode";
 function App() {
   return (
-    <div classNameName="App">
-     <Try/>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign" element={<Sign />} />
+          <Route path="/scanner" element={<Scan />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/blogs" element={<BlogsPage />} />
+          <Route path="/contectus" element={<ContectUsPage />} />
+          <Route path="/scanner/network" element={<Networkpage />} />
+          <Route path="/scanner/web" element={<Webpage />} />
+          <Route path="/scanner/sourcecode" element={<Sourcecode />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
     </div>
   );
 }

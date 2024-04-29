@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./home.css";
 import imageSrc from "./home.jpg"; // Import the image
-import { Route,Routes} from "react-router-dom";
+
 function Home() {
   
   return (
@@ -21,7 +21,7 @@ function Home() {
           <li>
           Manage your risks via dashboards, alerts, and powerful reporting
           
-          <Link className="btn btn-outline-warning" style={{marginLeft: "20px", marginTop: "5px",color: "aliceblue", textDecoration: "none"}} to="/login">Scan Now</Link>
+          <Link className="btn btn-outline-warning" style={{marginLeft: "20px", marginTop: "5px",color: "aliceblue", textDecoration: "none"}} to="/">Scan Now</Link>
           
           </li>
         </ul>

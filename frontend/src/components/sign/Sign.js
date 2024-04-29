@@ -1,17 +1,15 @@
 
-
-
-
 import "./sign.css";
 import Swal from 'sweetalert2'
+import { Link } from "react-router-dom";
 import withReactContent from 'sweetalert2-react-content'
 function Sign() {
     const MySwal = withReactContent(Swal)
 return(<>
-<div className="main-login">
+<div className="main-login1" >
 
-            <div className="right-login">
-                <div className="card-login">
+            <div className="right-login1">
+                <div className="card-login1">
                     <h1>Sign up</h1>
                     <div className="textfield">
                         <label for="Email">Email</label>
@@ -31,7 +29,7 @@ return(<>
                     </div>
                 
                     
-                    <button className="btn-login"onClick={()=>{
+                    <button className="btn-login1"onClick={()=>{
 Swal.fire({
 
   icon: "success",
@@ -40,13 +38,16 @@ Swal.fire({
   timer: 700
 });}}>Sign up</button>
         
-                    <div className="log-in-another">
-                        <button className="btn "style={{background:" 	#1877F2"}}>
-                      Facebook
-                        </button>
-                        <button className="btn "style={{background:" #ffffff"}}>
-                            Google
-                        </button>
+                 <div className="log-in-another1">
+                        <span className="btn btn-light">
+                        <i class="fa-brands fa-facebook " style={{color: "#2555a2"}}></i>
+                        </span>
+                        <span className="btn btn-light">
+                        <i class="fa-brands fa-google" style={{color: "#2555a2"}}></i>
+                        </span>
+                    </div>
+                    <div className="new-users1">
+                        <Link to="/login" style={{textDecoration:'none'}} >have account!</Link>
                     </div>
                 
                 </div>

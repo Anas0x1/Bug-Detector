@@ -1,6 +1,13 @@
 
-
-
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+li{
+  list-style-type: none;
+}
 .network .dec-network a:hover{
     font-size: larger;
 }
@@ -24,7 +31,7 @@
   }
   .web .dec-web ,.network .dec-network,.sourcecode  .dec-code {
     
-    animation: fadeIn 2s ;
+    animation: fadeIn 2s;
   }
 
   @keyframes translateXweb {
@@ -56,6 +63,7 @@
         opacity: 1;
       transform: translateX(30px);
     }
+    
   }
   @keyframes fadeIn {
     0% {
@@ -70,6 +78,7 @@
     100% {
       opacity: 1;
     }
+  
   }
   
 

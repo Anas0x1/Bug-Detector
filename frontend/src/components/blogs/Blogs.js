@@ -59,11 +59,10 @@ const Blogs = () => {
                 </div>
             </div>
 
-            <div className="container">
-                <div className="row" id="blogs"></div>
-            </div>
+          
         </>
     );
 };
 
 export default Blogs;
+

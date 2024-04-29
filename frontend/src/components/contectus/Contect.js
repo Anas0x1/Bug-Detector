@@ -11,7 +11,7 @@ const Contect = () => {
     
     return (
         <div className="container" id="container-2">
-            <div className="main">
+            <div className="main1">
                 <h3>Contact us</h3>
                 <input type="email" placeholder="Your email" id="email" required />
             </div>

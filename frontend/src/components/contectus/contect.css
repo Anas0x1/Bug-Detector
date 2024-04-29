@@ -2,10 +2,10 @@
 #container-2{
     margin-left: 25%;margin-top: 10%;
 }
-#container-2 .main h3{
+#container-2 .main1 h3{
     margin-top: 100px;color: aliceblue;margin-bottom: 50px;
 }
-#container-2 .main input{
+#container-2 .main1 input{
     width: 500px;margin-bottom: 10px;
 border-radius: 4px;
 border: none;

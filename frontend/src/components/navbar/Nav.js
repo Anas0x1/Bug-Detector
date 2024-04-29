@@ -25,11 +25,11 @@ function Nav()
                     <Link to="/pricing" className="nav-link text-white" target="blank">Pricing</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/contect" className="nav-link text-white" target="blank">Contect us</Link>
+                    <Link to="/contectus" className="nav-link text-white" target="blank">Contect us</Link>
                   </li>
 
                   <li className="nav-item" >
-                    <Link to="/login" className="nav-link text-warning" target="blank" style={{marginLeft:"300px"}}>Log in</Link>
+                    <Link to="/login" className="nav-link text-warning" target="blank"  style={{marginLeft:"200px"}}>Log in</Link>
                   </li>
                 
                 </ul>

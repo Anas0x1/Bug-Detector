@@ -1,7 +1,6 @@
 
 .main-login {
-    width: 100vw; /* vw: porcentagem da largura da sua viewport(tela) */
-    height: 100vh;
+
     background: transparent;
     display: flex;
     justify-content: center; /* centraliza no eixo x */
@@ -35,7 +34,8 @@
 }
 
 .card-login {
-    width: 60%; 
+    width: 60% !important; 
+    height: 75% !important;
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -47,7 +47,7 @@
 
 .card-login > h1 { /* pega todos h1 dentro da div .card-login */
     color:#ffffff;
-    font-weight: 800;
+    font-weight: 600;
     margin: 0;
 }
 
@@ -104,12 +104,14 @@
     display: flex;
     gap: 20px;
 }
-.log-in-another button{
- width:50%;
+.log-in-another span{
+ display: inline;
+ margin-top: 10px;
  outline: none;
  border: none;
  color: #2b134b;
  font-weight: 500;
+ font-size: small;
 }
 
 .btn-cadastre-se {

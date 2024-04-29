@@ -1,14 +1,12 @@
 
-.main-login {
-    width: 100vw; /* vw: porcentagem da largura da sua viewport(tela) */
-    height: 100vh;
+.main-login1 {
     background: transparent;
     display: flex;
     justify-content: center; /* centraliza no eixo x */
     align-items: center;
 }
 
-.left-login {
+.left-login1 {
     width: 50vw;
     height: 100vh;
     display: flex;
@@ -17,16 +15,16 @@
     flex-direction: column;
 }
 
-.left-login > h1 { /* Todos h1 dentro da div left-login */
+.left-login1 > h1 { /* Todos h1 dentro da div left-login */
     font-size: 3vw;
     color: #ffffff;
 }
 
-.left-login-image {
+.left-login1-image {
     width: 35vw;
 }
 
-.right-login {
+.right-login1 {
     width: 50vw;
     height: 100vh;
     display: flex;
@@ -34,8 +32,9 @@
     align-items: center;
 }
 
-.card-login {
-    width: 60%; 
+.card-login1 {
+    width: 60% !important; 
+    height: 95% !important;
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -45,9 +44,9 @@
     box-shadow: 0px 10px 40px #00000056; 
 }
 
-.card-login > h1 { /* pega todos h1 dentro da div .card-login */
+.card-login1 > h1 { 
     color:#ffffff;
-    font-weight: 800;
+    font-weight: 600;
     margin: 0;
 }
 
@@ -82,7 +81,7 @@
     color: #f0ffff94;
 }
 
-.btn-login {
+.btn-login1 {
     width: 70%;
     height: 50px;
 
@@ -100,11 +99,11 @@
  
    
 }
-.log-in-another{
+.log-in-another1{
     display: flex;
     gap: 20px;
 }
-.log-in-another button{
+.log-in-another1 span{
  width:50%;
  outline: none;
  border: none;
@@ -112,64 +111,64 @@
  font-weight: 500;
 }
 
-.btn-cadastre-se {
+.btn-cadastre-se1 {
     text-decoration: none;
     letter-spacing: 2px;
     color: white;
 }
 
-.btn-cadastre-se:hover{
+.btn-cadastre-se1:hover{
   cursor: pointer;
 }
-.span-cadastre-se {
+.span-cadastre-se1 {
     color:#ffffff;
 }
 
 @media only screen and (max-width: 950px) {
-    .card-login {
+    .card-login1 {
         width: 85%;
     }
 }
-.new-users{ margin-top: 10px;}
-.new-users span{
+.new-users1{ margin-top: 10px;}
+.new-users1 span{
     margin-top: 10px;
     color: #ffffff;
 
 }
-.new-users span:hover{
+.new-users1 span:hover{
     cursor: pointer;
     font-weight:600;
 }
 
 @media only screen and (max-width: 600px) {
-    .main-login {
+    .main-login1 {
         flex-direction: column;
         padding-bottom: 30px;
     }
 
-    .left-login > h1 {
+    .left-login1 > h1 {
         display: none;
     }
 
-    .left-login {
+    .left-login1 {
         width: 100%;
         height: auto;
     }
 
-    .right-login {
+    .right-login1 {
         width: 100%;
         height: auto;
     }
 
-    .left-login-image {
+    .left-login1-image {
         width: 50vw;
     }
 
-    .card-login {
+    .card-login1 {
         width: 90%;
     }
 
-    .btn-plus {
+    .btn-plus1 {
         width: 100%;
     }
 }

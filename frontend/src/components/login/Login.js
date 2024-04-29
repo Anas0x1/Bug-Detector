@@ -3,7 +3,7 @@ import Sign from "../sign/Sign";
 import "./login.css";
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 import withReactContent from 'sweetalert2-react-content'
 function Login() {
 
@@ -36,15 +36,15 @@ Swal.fire({
 });}}>Login</button>
         
                     <div className="log-in-another">
-                        <button className="btn "style={{background:" 	#1877F2"}}>
-                      Facebook
-                        </button>
-                        <button className="btn "style={{background:" #ffffff"}} >
-                            Google
-                        </button>
+                        <span className="btn btn-light">
+                        <i class="fa-brands fa-facebook " style={{color: "#2555a2"}}></i>
+                        </span>
+                        <span className="btn btn-light">
+                        <i class="fa-brands fa-google" style={{color: "#2555a2"}}></i>
+                        </span>
                     </div>
                     <div className="new-users">
-                        <Link to="/login/signin" onClick={()=>{<Sign/>}}>New BugDetector?</Link>
+                        <Link to="/sign" style={{textDecoration:"none"}}>New BugDetector?</Link>
                     </div>
                 </div>
             </div>
