@@ -10,6 +10,7 @@ import BlogsPage from "./pages/BlogsPage";
 import Networkpage from "./pages/Networkpage";
 import Webpage from "./pages/Webpage";
 import Sourcecode from "./pages/Sourcecode";
+import UserAccount from "./pages/UserAccount";
 function App() {
   return (
     <div>
@@ -25,8 +26,10 @@ function App() {
           <Route path="/scanner/network" element={<Networkpage />} />
           <Route path="/scanner/web" element={<Webpage />} />
           <Route path="/scanner/sourcecode" element={<Sourcecode />} />
+          <Route path="/useraccount" element={<UserAccount/>}/>
         </Routes>
       </BrowserRouter>
+
       <Footer />
     </div>
   );
