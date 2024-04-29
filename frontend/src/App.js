@@ -11,6 +11,7 @@ import Networkpage from "./pages/Networkpage";
 import Webpage from "./pages/Webpage";
 import Sourcecode from "./pages/Sourcecode";
 import UserAccount from "./pages/UserAccount";
+import PaymentCard from "./pages/PaymentCard";
 function App() {
   return (
     <div>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/scanner/web" element={<Webpage />} />
           <Route path="/scanner/sourcecode" element={<Sourcecode />} />
           <Route path="/useraccount" element={<UserAccount/>}/>
+          <Route path="/pricing/payment" element={<PaymentCard/>}/>
         </Routes>
       </BrowserRouter>
 

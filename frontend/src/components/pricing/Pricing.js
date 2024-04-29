@@ -59,7 +59,10 @@ function Pricing() {
                                     <li>Scheduled scan</li>
                                     <li>Summary reports</li>
                                 </ul>
-                                <Link to="/pricing/payment" className='btn btn-outline-warning'>Purchase</Link>
+                               
+             <Link to="/pricing/payment" className='btn btn-outline-warning'>Purchase</Link>
+                              
+
                             </div>
                         </div>
                     </div>
