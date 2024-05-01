@@ -162,6 +162,18 @@ validate_domain() {
 			echo "[-] please install dirsearch"
 		fi
 
+  		echo -e "${CYAN}[+] Collecting Links from wayback machine${WHITE}" 
+		if command -v waybackurls &> /dev/null;then
+			echo -e "${BOLDGREEN}"
+			echo "$1" | waybackurls | tee wayback_machine.txt
+			line_3=$(cat wayback_machine.txt | wc -l)
+			echo -e "${WHITE}"
+			echo -e "${CYAN}[+] Found $line_3 URLs from wayback machine for $url${WHITE}"
+			echo -e "${YELLOW}################################################${WHITE}"
+		else
+			echo "[-] please install waybackurls"
+		fi
+
 	else
 		echo -e "${RED} Invalid domain/subdomain: $1 ${WHITE}"
 	fi
