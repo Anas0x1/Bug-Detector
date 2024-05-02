@@ -7,7 +7,7 @@ function User() {
     <div className="container" style={{marginTop:"70px",backgroundColor:"rgba(255, 255, 255, 0.75)", borderRadius:"10px", height:"100vh",padding:'50px'}}>
 
     <h2 style={{color:"white"}}>Scans</h2>
-    <Link to="/scanner" className="btn btn-warning" id="btn-scan" ><i class="fa-solid fa-plus"></i> New Scan </Link>
+    <Link to="/scanner" className="btn btn-warning" id="btn-scan" ><i className="fa-solid fa-plus"></i> New Scan </Link>
       
     <table className="table align-middle mb-0 bg-white" style={{marginTop:"10px"}}>
           <thead className="bg-light">
@@ -31,7 +31,7 @@ function User() {
                 </div>
               </td>
               <td>
-              <i class="fa-solid fa-check" style={{color: "white", backgroundColor:"#76fe06",width:"30px",height:"30px",display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%" }}></i>
+              <i className="fa-solid fa-check" style={{color: "white", backgroundColor:"#76fe06",width:"30px",height:"30px",display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%" }}></i>
               </td>
               <td>
                 <span >8.8.8.8.8</span>

@@ -12,15 +12,15 @@ return(<>
                 <div className="card-login1">
                     <h1>Sign up</h1>
                     <div className="textfield">
-                        <label for="Email">Email</label>
+                        <label htmlFor="Email">Email</label>
                         <input type="text" name="Email" placeholder="Email"/>
                     </div>
                     <div className="textfield">
-                        <label for="Name">Name</label>
+                        <label htmlFor="Name">Name</label>
                         <input type="text" name="Name" placeholder="Name"/>
                     </div>
                     <div className="textfield">
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input type="password" name="password" placeholder="Password"/>
                     </div>
                     <div className="textfield">
@@ -40,10 +40,10 @@ Swal.fire({
         
                  <div className="log-in-another1">
                         <span className="btn btn-light">
-                        <i class="fa-brands fa-facebook " style={{color: "#2555a2"}}></i>
+                        <i className="fa-brands fa-facebook " style={{color: "#2555a2"}}></i>
                         </span>
                         <span className="btn btn-light">
-                        <i class="fa-brands fa-google" style={{color: "#2555a2"}}></i>
+                        <i className="fa-brands fa-google" style={{color: "#2555a2"}}></i>
                         </span>
                     </div>
                     <div className="new-users1">
