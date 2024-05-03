@@ -10,7 +10,7 @@ function Sign() {
     const dispatch = useDispatch();
     const MySwal = withReactContent(Swal);
     const registrationError = useSelector((state) => state.auth.error);
-    const navigate = useNavigate(); // Initialize useNavigate hook
+   
 
     const [formData, setFormData] = useState({
         email: '',
@@ -42,8 +42,8 @@ function Sign() {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // Redirect to home page after successful registration
-                navigate('/');
+              
+            
             })
             .catch((error) => {
                 MySwal.fire({

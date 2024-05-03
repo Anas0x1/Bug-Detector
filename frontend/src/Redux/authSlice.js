@@ -4,7 +4,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await fetch('https://localhost:7268/api/Account/Login', {
+      const response = await fetch('https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Account/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await fetch('https://localhost:7268/api/Account/Register', {
+      const response = await fetch('https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Account/Register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

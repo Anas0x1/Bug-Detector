@@ -10,7 +10,7 @@ const HomePage = () => {
 
     useEffect(() => {
         if (!isAuthenticated) {
-            navigate('/login'); // Use navigate instead of history.push
+            navigate('/'); // Use navigate instead of history.push
         }
     }, [isAuthenticated, navigate]);
 
