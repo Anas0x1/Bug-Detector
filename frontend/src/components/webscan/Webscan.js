@@ -1,6 +1,7 @@
 import "./webscan.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { scanPrUrl } from "../../Redux/urlScanPSlice";
 import { scanUrl } from "../../Redux/urlScanFreeSlice";
 function Webscan() {
   const dispatch = useDispatch();
@@ -11,6 +12,9 @@ function Webscan() {
 
   const handleScanUrl = () => {
     dispatch(scanUrl(url));
+  };
+  const handlePremiumScanUrl = () => {
+    dispatch(scanPrUrl(url));
   };
   return (
     <>
@@ -46,6 +50,7 @@ function Webscan() {
               type="button"
               className="btn btn-success"
               style={{ marginLeft: "10px" }}
+              onClick={handlePremiumScanUrl} 
             >
               Primum Scan
             </button>
@@ -187,11 +192,11 @@ function Webscan() {
         {status === "succeeded" && <div>{JSON.stringify(result)}</div>}
         {status === "failed" && (
           <div
-            className="alert alert-warning"
+            className="alert alert-danger"
             role="alert"
             style={{ width: "300px" }}
           >
-            Faild to scan try again !
+            Faild to scan try again ! {error}
           </div>
         )}
       </div>
