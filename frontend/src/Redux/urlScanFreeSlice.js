@@ -1,13 +1,28 @@
-// urlScanSlice.js
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const scanUrl = createAsyncThunk(
   'urlScan/scanUrl',
   async (url) => {
-    const response = await fetch(`https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/FreeWebScan?url=${url}`);
-    const data = await response.json();
-    return data;
+    try {
+      const response = await fetch('https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/FreeWebScan', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await response.json();
+      
+      return data;
+    } catch (error) {
+     
+      throw error;
+    }
   }
 );
 

@@ -1,18 +1,10 @@
 import "./webscan.css";
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { scanUrl } from '../../Redux/urlScanFreeSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { scanUrl } from "../../Redux/urlScanFreeSlice";
 function Webscan() {
-
-
-
-
-
-
-
-
   const dispatch = useDispatch();
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const result = useSelector((state) => state.urlScan.result);
   const status = useSelector((state) => state.urlScan.status);
   const error = useSelector((state) => state.urlScan.error);
@@ -38,7 +30,8 @@ function Webscan() {
             placeholder="Enter Domin , SubDomin , URL"
             id="input"
             className="input-url"
-            value={url} onChange={(e) => setUrl(e.target.value)}
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
           />
 
           <div className="btn-group" style={{ marginLeft: "10px" }}>
@@ -46,18 +39,16 @@ function Webscan() {
               type="button"
               className="btn btn-success"
               onClick={handleScanUrl}
-             
-            > 
-             Free Scan
+            >
+              Free Scan
             </button>
             <button
               type="button"
               className="btn btn-success"
               style={{ marginLeft: "10px" }}
             >
-             Primum Scan
+              Primum Scan
             </button>
-            
           </div>
 
           <div className="input-group-append" style={{ marginLeft: "10px" }}>
@@ -185,10 +176,24 @@ function Webscan() {
           </div>
         </div>
       </div>
-      <div className="conatiner output" >
-      {status === 'loading' && <div>Loading...</div>}
-      {status === 'succeeded' && <div>{JSON.stringify(result)}</div>}
-      {status === 'failed' && <div>Error: {error}</div>}
+      <div className="conatiner output">
+        {status === "loading" && (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
+        {status === "succeeded" && <div>{JSON.stringify(result)}</div>}
+        {status === "failed" && (
+          <div
+            className="alert alert-warning"
+            role="alert"
+            style={{ width: "300px" }}
+          >
+            Faild to scan try again !
+          </div>
+        )}
       </div>
     </>
   );
