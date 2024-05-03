@@ -6,7 +6,7 @@ export default function BlogsPage() {
     <>
     <Nav/>
     <Blogs/>
-    
     </>
   )
 }
+

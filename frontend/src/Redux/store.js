@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-
+import blogsReducer from './blogsSlice'; 
+import urlScanReducer from "./urlScanFreeSlice";
 const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    blogs: blogsReducer,
+    urlScan: urlScanReducer,
   }
 });
 

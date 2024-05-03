@@ -1,6 +1,25 @@
 import "./webscan.css";
-
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { scanUrl } from '../../Redux/urlScanFreeSlice';
 function Webscan() {
+
+
+
+
+
+
+
+
+  const dispatch = useDispatch();
+  const [url, setUrl] = useState('');
+  const result = useSelector((state) => state.urlScan.result);
+  const status = useSelector((state) => state.urlScan.status);
+  const error = useSelector((state) => state.urlScan.error);
+
+  const handleScanUrl = () => {
+    dispatch(scanUrl(url));
+  };
   return (
     <>
       <div className="container">
@@ -19,93 +38,26 @@ function Webscan() {
             placeholder="Enter Domin , SubDomin , URL"
             id="input"
             className="input-url"
+            value={url} onChange={(e) => setUrl(e.target.value)}
           />
 
           <div className="btn-group" style={{ marginLeft: "10px" }}>
             <button
               type="button"
-              className="btn btn-success dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Scan options
+              className="btn btn-success"
+              onClick={handleScanUrl}
+             
+            > 
+             Free Scan
             </button>
-            <ul className="dropdown-menu dropdown-menu-dark" style={{ maxHeight: "200px", overflowY: "auto" }}>
-              <li>
-                <span className="dropdown-item" value="information gathering">
-                  information gathering
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="DNS scan">
-                  DNS scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Directory fuzzing">
-                  Directory fuzzing
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Parameter discovery">
-                  Parameter discovery
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="SubDomin enumeration">
-                  SubDomin enumeration
-                </span>
-              </li>
-
-              <li>
-                <span className="dropdown-item" value="SubDomin takeover">
-                  SubDomin takeover
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Xss scan">
-                  Xss scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="CORS scan">
-                  CORS scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Missing response header">
-                  Missing response header
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="SQLI scan">
-                  SQLI scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Lfi scan">
-                  Lfi scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="SSTI scan">
-                  SSTI scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="CVEs scan">
-                  CVEs scan
-                </span>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <span className="dropdown-item" value="Scan All">
-                  Scan All
-                </span>
-              </li>
-            </ul>
+            <button
+              type="button"
+              className="btn btn-success"
+              style={{ marginLeft: "10px" }}
+            >
+             Primum Scan
+            </button>
+            
           </div>
 
           <div className="input-group-append" style={{ marginLeft: "10px" }}>
@@ -232,6 +184,11 @@ function Webscan() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="conatiner output" >
+      {status === 'loading' && <div>Loading...</div>}
+      {status === 'succeeded' && <div>{JSON.stringify(result)}</div>}
+      {status === 'failed' && <div>Error: {error}</div>}
       </div>
     </>
   );
