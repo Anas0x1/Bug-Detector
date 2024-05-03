@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { HomePage } from "./pages/HomePage";
+import  HomePage from "./pages/HomePage";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Sign from "./components/sign/Sign";
@@ -12,9 +12,12 @@ import Webpage from "./pages/Webpage";
 import Sourcecode from "./pages/Sourcecode";
 import UserAccount from "./pages/UserAccount";
 import PaymentCard from "./pages/PaymentCard";
+import { Provider } from 'react-redux';
+import store from './Redux/store';
 function App() {
   return (
     <div>
+      <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -31,7 +34,7 @@ function App() {
           <Route path="/pricing/payment" element={<PaymentCard/>}/>
         </Routes>
       </BrowserRouter>
-
+      </Provider>
       <Footer />
     </div>
   );

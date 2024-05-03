@@ -119,6 +119,9 @@
     letter-spacing: 2px;
     color: white;
 }
+p{
+    color:#ffffff;
+}
 
 .btn-cadastre-se:hover{
   cursor: pointer;

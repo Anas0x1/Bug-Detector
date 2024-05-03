@@ -1,61 +1,99 @@
-
-import "./sign.css";
-import Swal from 'sweetalert2'
-import { Link } from "react-router-dom";
-import withReactContent from 'sweetalert2-react-content'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../../Redux/authSlice';
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import './sign.css';
+import HomePage from '../../pages/HomePage';
 function Sign() {
-    const MySwal = withReactContent(Swal)
-return(<>
-<div className="main-login1" >
+    const dispatch = useDispatch();
+    const MySwal = withReactContent(Swal);
+    const registrationError = useSelector((state) => state.auth.error);
+    const navigate = useNavigate(); // Initialize useNavigate hook
 
-            <div className="right-login1">
-                <div className="card-login1">
-                    <h1>Sign up</h1>
-                    <div className="textfield">
-                        <label htmlFor="Email">Email</label>
-                        <input type="text" name="Email" placeholder="Email"/>
-                    </div>
-                    <div className="textfield">
-                        <label htmlFor="Name">Name</label>
-                        <input type="text" name="Name" placeholder="Name"/>
-                    </div>
-                    <div className="textfield">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" placeholder="Password"/>
-                    </div>
-                    <div className="textfield">
-                        
-                        <input type="confirm password" name="confirm password" placeholder="Confirm password"/>
-                    </div>
-                
-                    
-                    <button className="btn-login1"onClick={()=>{
-Swal.fire({
+    const [formData, setFormData] = useState({
+        email: '',
+        name: '',
+        password: '',
+        confirmPassword: ''
+    });
 
-  icon: "success",
-  title: "Welcome to BugDetector",
-  showConfirmButton: false,
-  timer: 700
-});}}>Sign up</button>
-        
-                 <div className="log-in-another1">
-                        <span className="btn btn-light">
-                        <i className="fa-brands fa-facebook " style={{color: "#2555a2"}}></i>
-                        </span>
-                        <span className="btn btn-light">
-                        <i className="fa-brands fa-google" style={{color: "#2555a2"}}></i>
-                        </span>
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = () => {
+        if (formData.password !== formData.confirmPassword) {
+            MySwal.fire({
+                icon: 'error',
+                title: 'Passwords do not match',
+                text: 'Please make sure your passwords match',
+            });
+            return;
+        }
+
+        dispatch(register(formData))
+            .then(() => {
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Registration Successful',
+                    text: 'Welcome to BugDetector',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                // Redirect to home page after successful registration
+                navigate('/');
+            })
+            .catch((error) => {
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: error.message || 'Something went wrong with registration',
+                });
+            });
+    };
+
+    return (
+        <>
+            <div className="main-login1" >
+                <div className="right-login1">
+                    <div className="card-login1">
+                        <h1>Sign up</h1>
+                        <div className="textfield">
+                            <label htmlFor="email">Email</label>
+                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                        </div>
+                        <div className="textfield">
+                            <label htmlFor="name">Name</label>
+                            <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+                        </div>
+                        <div className="textfield">
+                            <label htmlFor="password">Password</label>
+                            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                        </div>
+                        <div className="textfield">
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <input type="password" name="confirmPassword" placeholder="Confirm password" value={formData.confirmPassword} onChange={handleChange} />
+                        </div>
+                        <button className="btn-login1" onClick={handleSubmit}>Sign up</button>
+                        <div className="log-in-another1">
+                            <span className="btn btn-light">
+                                <i className="fa-brands fa-facebook " style={{ color: "#2555a2" }}></i>
+                            </span>
+                            <span className="btn btn-light">
+                                <i className="fa-brands fa-google" style={{ color: "#2555a2" }}></i>
+                            </span>
+                        </div>
+                        <div className="new-users1">
+                            <Link to="/login" style={{ textDecoration: 'none' }} >Already have an account?</Link>
+                        </div>
+                        {registrationError && <div>{registrationError}</div>}
                     </div>
-                    <div className="new-users1">
-                        <Link to="/login" style={{textDecoration:'none'}} >have account!</Link>
-                    </div>
-                
                 </div>
             </div>
-        </div>
-
-
-</>);
+        </>
+    );
 }
 
 export default Sign;

@@ -1,16 +1,24 @@
-import Sign from "../sign/Sign";
+
 import "./login.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import withReactContent from "sweetalert2-react-content";
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../Redux/authSlice';
+import withReactContent from "sweetalert2-react-content";
+
 function Login() {
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector(state => state.auth);
 
+  const handleLogin = () => {
+    dispatch(login({ username, password }));
+  };
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+  
     
 
 
@@ -30,17 +38,17 @@ function Login() {
               <input type="password" name="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
 
-            <span className="btn-cadastre-se" href="/">
+            <span className="btn-cadastre-se" href="/" >
               Forget password?
             </span>
 
             <button
               className="btn-login"
-         
-          
+              onClick={handleLogin} disabled={loading}
             >
               Login
             </button>
+            {error && <p style={{color:"white"}}>{error}</p>}
             
             <div className="log-in-another">
               <span className="btn btn-light">
