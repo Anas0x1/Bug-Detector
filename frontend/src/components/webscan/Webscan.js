@@ -9,13 +9,17 @@ function Webscan() {
   const result = useSelector((state) => state.urlScan.result);
   const status = useSelector((state) => state.urlScan.status);
   const error = useSelector((state) => state.urlScan.error);
+  const [type,setType]=useState("none");
 
   const handleScanUrl = () => {
+    setType('free');
     dispatch(scanUrl(url));
   };
   const handlePremiumScanUrl = () => {
+    setType('Pr');
     dispatch(scanPrUrl(url));
   };
+ 
   return (
     <>
       <div className="container">
@@ -50,7 +54,7 @@ function Webscan() {
               type="button"
               className="btn btn-success"
               style={{ marginLeft: "10px" }}
-              onClick={handlePremiumScanUrl} 
+              onClick={handlePremiumScanUrl}
             >
               Primum Scan
             </button>
@@ -182,24 +186,24 @@ function Webscan() {
         </div>
       </div>
       <div className="conatiner output">
-        {status === "loading" && (
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-              <span className="sr-only">Loading...</span>
+          {status === "loading" && (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
-          </div>
-        )}
-        {status === "succeeded" && <div>{JSON.stringify(result)}</div>}
-        {status === "failed" && (
-          <div
-            className="alert alert-danger"
-            role="alert"
-            style={{ width: "300px" }}
-          >
-            Faild to scan try again ! {error}
-          </div>
-        )}
-      </div>
+          )}
+          {status === "succeeded" && <div>{JSON.stringify(result)}</div>}
+          {status === "failed" && (
+            <div
+              className="alert alert-warning"
+              role="alert"
+              style={{ width: "300px" }}
+            >
+              Faild to scan try again !!!! {error}
+            </div>
+          )}
+        </div>
     </>
   );
 }

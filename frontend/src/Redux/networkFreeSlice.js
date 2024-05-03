@@ -1,18 +1,12 @@
+// networkScanSlice.js
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-
-const userIsPremium = true; 
-
-export const scanPrUrl = createAsyncThunk(
-  'urlScan/scanUrl',
+export const scanNetwork = createAsyncThunk(
+  'networkScan/scan',
   async (url) => {
-    if (!userIsPremium) {
-     
-      throw new Error('Premium account required for scanning');
-    }
-
     try {
-      const response = await fetch('https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/PremiumWebScan', {
+      const response = await fetch("https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/FreeNetworkScan", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,7 +22,6 @@ export const scanPrUrl = createAsyncThunk(
       
       return data;
     } catch (error) {
-     
       throw error;
     }
   }
@@ -40,25 +33,25 @@ const initialState = {
   error: null
 };
 
-const urlScanPSlice = createSlice({
-  name: 'urlScan',
+const networkScanSlice = createSlice({
+  name: 'networkScan',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(scanPrUrl.pending, (state) => {
+      .addCase(scanNetwork.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(scanPrUrl.fulfilled, (state, action) => {
+      .addCase(scanNetwork.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.result = action.payload;
       })
-      .addCase(scanPrUrl.rejected, (state, action) => {
+      .addCase(scanNetwork.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   }
 });
 
-export default urlScanPSlice.reducer;
+export default networkScanSlice.reducer;

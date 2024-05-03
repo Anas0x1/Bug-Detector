@@ -17,7 +17,7 @@ export const login = createAsyncThunk(
       }
 
       const data = await response.json();
-      return data; // assuming the response contains authentication token or user information
+      return data;
     } catch (error) {
       throw error;
     }
@@ -41,7 +41,7 @@ export const register = createAsyncThunk(
       }
 
       const data = await response.json();
-      return data; // assuming the response contains user information or confirmation
+      return data;  
     } catch (error) {
       throw error;
     }
