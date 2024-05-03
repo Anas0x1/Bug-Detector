@@ -1,13 +1,23 @@
-
-
-
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { scanNetwork } from '../../Redux/networkFreeSlice';
 
 
 import "./networkscan.css"
+
 function Networkscan()
 {
 
+  const [url, setUrl] = useState('');
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.networkScan.status);
+  const error = useSelector((state) => state.networkScan.error);
+  const result = useSelector((state) => state.networkScan.result);
 
+  const handleSubmit = () => {
+   
+    dispatch(scanNetwork(url));
+  };
     return (<>
     
     <div className="container">
@@ -26,49 +36,29 @@ function Networkscan()
             placeholder="Enter Domin , IP"
             id="input"
             className="input-url"
+            value={url} onChange={(e) => setUrl(e.target.value)}
           />
 
           <div className="btn-group" style={{ marginLeft: "10px" }}>
             <button
-              type="button"
-              class="btn btn-success dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Scan options
-            </button>
-            <ul className="dropdown-menu dropdown-menu-dark" style={{ maxHeight: "200px", overflowY: "auto" }}>
-              <li>
-                <span className="dropdown-item" value="information gathering">
-                  information gathering
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="DNS scan">
-                  DNS scan
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Directory fuzzing">
-                 Port scanning
-                </span>
-              </li>
-              <li>
-                <span className="dropdown-item" value="Parameter discovery">
-                  Searching CVEs
-                </span>
-              </li>
-   
              
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <span className="dropdown-item" value="Scan All">
-                  Scan All
-                </span>
-              </li>
-            </ul>
+              className="btn btn-success "
+              type="submit"
+              onClick={handleSubmit}
+            >
+            Free Scan
+            </button>
+
+            <button
+            
+              className="btn btn-success "
+              style={{ marginLeft: "10px" }}
+              type="submit"
+             
+            >
+            Premium scan
+            </button>
+            
           </div>
 
           <div className="input-group-append" style={{ marginLeft: "10px" }}>
@@ -196,7 +186,25 @@ function Networkscan()
           </div>
         </div>
       </div>
-  
+      <div className="container output">
+        {status === "loading" && (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
+        {status === "succeeded" && <div>{JSON.stringify(result, null, 2)}</div>}
+        {status === "failed" && (
+          <div
+            className="alert alert-danger"
+            role="alert"
+            style={{ width: "300px" }}
+          >
+            Faild to scan try again ! {error}
+          </div>
+        )}
+      </div>
     </>);
 }
 export default Networkscan;
