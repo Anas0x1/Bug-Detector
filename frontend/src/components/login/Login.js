@@ -1,4 +1,3 @@
-
 import "./login.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -8,19 +7,14 @@ import { login } from '../../Redux/authSlice';
 import withReactContent from "sweetalert2-react-content";
 
 function Login() {
-
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.auth);
 
   const handleLogin = () => {
-    dispatch(login({ username, password }));
+    dispatch(login({ email: email, password: password }));
   };
-
-  
-    
-
 
   const MySwal = withReactContent(Swal);
   return (
@@ -31,7 +25,7 @@ function Login() {
             <h1>Login</h1>
             <div className="textfield">
               <label htmlFor="Email">Email</label>
-              <input type="text" name="Email" placeholder="Email" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input type="text" name="Email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="textfield">
               <label htmlFor="password">password</label>
