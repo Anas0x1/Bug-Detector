@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../Redux/authSlice';
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import './sign.css';
-import HomePage from '../../pages/HomePage';
+
 function Sign() {
     const dispatch = useDispatch();
     const MySwal = withReactContent(Swal);
     const registrationError = useSelector((state) => state.auth.error);
-   
 
     const [formData, setFormData] = useState({
+        userName: '',
         email: '',
-        name: '',
         password: '',
         confirmPassword: ''
     });
@@ -42,8 +41,6 @@ function Sign() {
                     showConfirmButton: false,
                     timer: 1500
                 });
-              
-            
             })
             .catch((error) => {
                 MySwal.fire({
@@ -61,12 +58,12 @@ function Sign() {
                     <div className="card-login1">
                         <h1>Sign up</h1>
                         <div className="textfield">
-                            <label htmlFor="email">Email</label>
-                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                            <label htmlFor="userName">Username</label>
+                            <input type="text" name="userName" placeholder="Username" value={formData.userName} onChange={handleChange} />
                         </div>
                         <div className="textfield">
-                            <label htmlFor="name">Name</label>
-                            <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+                            <label htmlFor="email">Email</label>
+                            <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
                         </div>
                         <div className="textfield">
                             <label htmlFor="password">Password</label>
