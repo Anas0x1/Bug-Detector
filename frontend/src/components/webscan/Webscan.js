@@ -9,6 +9,7 @@ function Webscan() {
   const result = useSelector((state) => state.urlScan.result);
   const status = useSelector((state) => state.urlScan.status);
   const error = useSelector((state) => state.urlScan.error);
+  
   const [type,setType]=useState("none");
 
   const handleScanUrl = () => {

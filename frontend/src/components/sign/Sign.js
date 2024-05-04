@@ -32,7 +32,7 @@ function Sign() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        if(e.target.name=='password'){
+        if(e.target.name==='password'){
             setErrors({
                 ...errors,
                 PasswordErr: !passwordRegex.test(e.target.value) && 

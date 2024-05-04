@@ -1,4 +1,3 @@
-// networkPSlice.js
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
