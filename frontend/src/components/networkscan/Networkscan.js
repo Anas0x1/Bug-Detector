@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scanNetwork } from '../../Redux/networkFreeSlice';
-
+import { scanPremiumNetwork } from '../../Redux/networkPslice'
 
 import "./networkscan.css"
 
@@ -18,6 +18,11 @@ function Networkscan()
    
     dispatch(scanNetwork(url));
   };
+  const handleSubmitPremium = () => {
+   
+    dispatch(scanPremiumNetwork(url));
+  };
+
     return (<>
     
     <div className="container">
@@ -54,7 +59,7 @@ function Networkscan()
               className="btn btn-success "
               style={{ marginLeft: "10px" }}
               type="submit"
-             
+              onClick={handleSubmitPremium}
             >
             Premium scan
             </button>

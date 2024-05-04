@@ -1,6 +1,6 @@
 import "./login.css";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/authSlice';
@@ -12,8 +12,29 @@ function Login() {
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.auth);
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    dispatch(login({ email: email, password: password }));
+    dispatch(login({ email: email, password: password }))
+      .then((response) => {
+        if (!response.error) {
+          navigate('/');
+        }
+        else {
+          MySwal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: response.error.message || 'Something went wrong with login',
+          });
+        }
+      });
+      // .catch((error) => {
+      //   MySwal.fire({
+      //     icon: 'error',
+      //     title: 'Login Failed',
+      //     text: error.message || 'Something went wrong with login',
+      //   });
+      // });
   };
 
   const MySwal = withReactContent(Swal);
@@ -42,8 +63,8 @@ function Login() {
             >
               Login
             </button>
-            {error && <p style={{color:"white"}}>{error}</p>}
-            
+            {error && <p style={{ color: "white" }}>{error}</p>}
+
             <div className="log-in-another">
               <span className="btn btn-light">
                 <i

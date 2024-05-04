@@ -6,10 +6,13 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import './sign.css';
 
+
 function Sign() {
     const dispatch = useDispatch();
     const MySwal = withReactContent(Swal);
     const registrationError = useSelector((state) => state.auth.error);
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         userName: '',
@@ -18,8 +21,25 @@ function Sign() {
         confirmPassword: ''
     });
 
+    const [errors, setErrors] = useState(
+        {
+            PasswordErr: ""
+        }
+    )
+    
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{6,})/;
+
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if(e.target.name=='password'){
+            setErrors({
+                ...errors,
+                PasswordErr: !passwordRegex.test(e.target.value) && 
+                "Password must be at least 6 characters.one alphanumerice,one lowercase and one uppercase"
+            })
+
+        }
     };
 
     const handleSubmit = () => {
@@ -33,22 +53,42 @@ function Sign() {
         }
 
         dispatch(register(formData))
-            .then(() => {
-                MySwal.fire({
-                    icon: 'success',
-                    title: 'Registration Successful',
-                    text: 'Welcome to BugDetector',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            })
-            .catch((error) => {
-                MySwal.fire({
-                    icon: 'error',
-                    title: 'Registration Failed',
-                    text: error.message || 'Something went wrong with registration',
-                });
+            .then((response) => {
+                if (!response.error) {
+                    MySwal.fire({
+                        icon: 'success',
+                        title: 'Registration Successful',
+                        text: 'Welcome to BugDetector',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/login');
+                }
+                else {
+                    MySwal.fire({
+                        icon: 'error',
+                        title: 'Registration Failed',
+                        text: response.error.message || 'Something went wrong with registration',
+                    });
+                }
             });
+        // .then(() => {
+        //         MySwal.fire({
+        //             icon: 'success',
+        //             title: 'Registration Successful',
+        //             text: 'Welcome to BugDetector',
+        //             showConfirmButton: false,
+        //             timer: 1500
+        //         });
+        //        navigate('/login');
+        //     })
+        //     .catch((error) => {
+        //         MySwal.fire({
+        //             icon: 'error',
+        //             title: 'Registration Failed',
+        //             text: error.message || 'Something went wrong with registration',
+        //         });
+        //     });
     };
 
     return (
@@ -68,6 +108,7 @@ function Sign() {
                         <div className="textfield">
                             <label htmlFor="password">Password</label>
                             <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+                            <p>{errors.PasswordErr}</p>
                         </div>
                         <div className="textfield">
                             <label htmlFor="confirmPassword">Confirm Password</label>
