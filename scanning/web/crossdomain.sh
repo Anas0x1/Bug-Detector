@@ -6,14 +6,12 @@ url=$1
 response=$(curl -s -o /dev/null -w "%{http_code}" "${url}/crossdomain.xml")
 
 echo "#################################################################################"
-echo -e "[Title] Scanning the existance of /crossdomain.xml file"
+echo -e "Scanning the existance of /crossdomain.xml file"
 echo "#################################################################################"
 
 # Check if the response code is 200 (OK) or 301 (Moved Permanently)
 if [ "$response" -eq 200 ] || [ "$response" -eq 301 ]; then
-	echo """[Details]
-
-Vulnerability description
+	echo """Vulnerability description
 We have noticed that the target application has overly permissive settings in its client access policy files. The crossdomain.xml file controls the access of externally hosted Flash scripts to this website, while clientaccesspolicy.xml specifies other sites that can read content from this website - which is normally denied by the Same Origin Policy. This vulnerability arises from configurations that grant excessive permissions to clients.
 
 Risk description
@@ -35,11 +33,11 @@ OWASP Top 10 - 2013: A5 - Security Misconfiguration
 OWASP Top 10 - 2017: A6 - Security Misconfiguration
 	"""
 	echo "#################################################################################"
-	echo -e "[Output] http://${url}/crossdomain.xml is existed "
+	echo -e "http://${url}/crossdomain.xml is existed "
 else
-	echo "[Details] does not exist"
+	echo "File does not exist"
 	echo "#################################################################################"
-	echo -e "[Output] /crossdomain.xml does not exist for http://${url}"
+	echo -e " /crossdomain.xml does not exist for http://${url}"
 fi
 
 
