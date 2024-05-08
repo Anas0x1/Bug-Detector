@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/authSlice';
-import withReactContent from "sweetalert2-react-content";
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,21 +18,39 @@ function Login() {
     dispatch(login({ email: email, password: password }))
       .then((response) => {
         if (!response.error) {
+           Swal.fire({
+            icon: 'succes',
+            title: 'Welcome to BugDetector',
+           
+          });
           navigate('/');
         }
         else {
-          MySwal.fire({
-            icon: 'error',
-            title: 'Login Failed',
-            text: response.error.message || 'Something went wrong with login',
+
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
           });
+          Toast.fire({
+            icon: "error",
+            title: "Login Failed",
+          });
+         
         }
       });
    
   };
   
 
-  const MySwal = withReactContent(Swal);
+ 
   return (
     <>
       <div className="main-login">
