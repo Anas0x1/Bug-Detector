@@ -11,7 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.auth);
-
+ 
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -28,14 +28,9 @@ function Login() {
           });
         }
       });
-      // .catch((error) => {
-      //   MySwal.fire({
-      //     icon: 'error',
-      //     title: 'Login Failed',
-      //     text: error.message || 'Something went wrong with login',
-      //   });
-      // });
+   
   };
+  
 
   const MySwal = withReactContent(Swal);
   return (

@@ -21,7 +21,7 @@ function Home() {
           <li>
           Manage your risks via dashboards, alerts, and powerful reporting
           
-          <Link className="btn btn-outline-warning" style={{marginLeft: "20px", marginTop: "5px",color: "aliceblue", textDecoration: "none"}} to="/">Scan Now</Link>
+          <Link className="btn btn-outline-warning" style={{marginLeft: "20px", marginTop: "5px",color: "aliceblue", textDecoration: "none"}} to="/scanner">Scan Now</Link>
           
           </li>
         </ul>

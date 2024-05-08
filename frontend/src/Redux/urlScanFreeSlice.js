@@ -4,7 +4,7 @@ export const scanUrl = createAsyncThunk(
   'urlScan/scanUrl',
   async (url) => {
     try {
-      const response = await fetch('https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/FreeWebScan', {
+      const response = await fetch('https://redesigned-spork-wr7j77wq6w6gf5g6j-5220.app.github.dev/api/Scan/FreeWebScan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scanNetwork } from '../../Redux/networkFreeSlice';
 import { scanPremiumNetwork } from '../../Redux/networkPslice'
-
+import Swal from 'sweetalert2';
 import "./networkscan.css"
 
 function Networkscan()
@@ -13,10 +13,29 @@ function Networkscan()
   const status = useSelector((state) => state.networkScan.status);
   const error = useSelector((state) => state.networkScan.error);
   const result = useSelector((state) => state.networkScan.result);
-
+  const token = useSelector(state => state.auth.token); 
   const handleSubmit = () => {
-   
+    if(token){
     dispatch(scanNetwork(url));
+    }
+    else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "info",
+        title: "Login first"
+      });
+  
+    }
   };
   const handleSubmitPremium = () => {
    
