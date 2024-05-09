@@ -1,16 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
-import blogsReducer from './blogsSlice'; 
+import blogsReducer from './blogsSlice'; // Import the blogsSlice reducer
 import urlScanReducer from "./urlScanFreeSlice";
 import urlScanPReducer from "./urlScanPSlice";
 import networkScanReducer from "./networkFreeSlice";
 import networkPSliceReducer from './networkPslice';
+
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    blogs: blogsReducer,
+    blogs: blogsReducer, 
     urlScan: urlScanReducer,
-    urlPscan:urlScanPReducer,
+    urlPscan: urlScanPReducer,
     networkScan: networkScanReducer,
     networkPScan: networkPSliceReducer,
   }
