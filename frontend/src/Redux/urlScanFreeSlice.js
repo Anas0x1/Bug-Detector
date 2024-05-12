@@ -1,27 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { axiosInstance } from './axios-instance';
 export const scanUrl = createAsyncThunk(
   'urlScan/scanUrl',
   async (url) => {
     try {
-      const response = await fetch('https://redesigned-spork-wr7j77wq6w6gf5g6j-5220.app.github.dev/api/Scan/FreeWebScan', {
-        method: 'POST',
+      const response = await axiosInstance.post('https://localhost:7268/api/Scan/FreeWebScan', {
+        url
+      }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
-        },
-        body: JSON.stringify({ url })
+         
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-
-      const data = await response.json();
-      
-      return data;
+      return response.data;
     } catch (error) {
-     
       throw error;
     }
   }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllBlogs, selectAllBlogs, selectBlogsLoading, selectBlogsError, addNewBlog } from '../../Redux/blogsSlice';
+import { fetchAllBlogs, selectAllBlogs, selectBlogsLoading, selectBlogsError, addNewBlog, addLike, addDislike } from '../../Redux/blogsSlice';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import BlogCard from '../cardBlog/BlogCard';
@@ -13,13 +13,15 @@ const Blogs = () => {
         dispatch(fetchAllBlogs());
     }, [dispatch]);
 
-    const blogs = useSelector((state) =>selectAllBlogs(state));
-    const loading = useSelector((state) =>selectBlogsLoading(state));
-    const error = useSelector((state) =>selectBlogsError(state));
+    const blogs = useSelector((state) => selectAllBlogs(state));
+    const loading = useSelector((state) => selectBlogsLoading(state));
+    const error = useSelector((state) => selectBlogsError(state));
     const token = useSelector((state) => state.auth.token);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    console.log("blogs")
+    console.log(blogs)
 
     const handleAddBlog = () => {
         dispatch(addNewBlog({ title, content }));
@@ -31,6 +33,22 @@ const Blogs = () => {
         });
     };
 
+    const handleLike = (blogid, e) => {
+        dispatch(addLike({ blogid }));
+        MySwal.fire({
+          title: "Like added successfully",
+          icon: "success"
+        });
+      };
+      const handleDislike = (blogid, e) => {
+        dispatch(addDislike({ blogid }));
+        MySwal.fire({
+          title: "Dislike added successfully",
+          icon: "success"
+        });
+      };
+    
+
     if (loading) {
         return <div className="spinner-border text-light" role="status">
             <span className="sr-only">Loading...</span>
@@ -39,12 +57,15 @@ const Blogs = () => {
 
     return (
         <>
-            <div className="container search-input">
+            <div className="container search-input" style={{ marginTop: "5%" }}>
                 <input type="text" placeholder="Search" id="search-on-blogs" />
 
-                <button type="button" className="btn btn-success" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                {token && <button type="button" className="btn btn-success" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i className="fa-solid fa-plus"></i> Add Blog
-                </button>
+
+                </button>}
+
+
 
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
@@ -73,10 +94,24 @@ const Blogs = () => {
                     </div>
                 </div>
             </div>
-            <div className='container'>
+            <div className='container d-flex flex-wrap justify-content-between'>
+                {/* <div className='row'>
+                    <div className='col col-sm-3 mt-2 mb-2' > */}
                 {blogs.map((blog, index) => (
-                    <BlogCard key={index} title={blog.title} content={blog.content} />
+                    <div className='mt-3' key={index}>
+                        <BlogCard title={blog.title} content={blog.content} />
+                        <div className='text-light'>
+                            <span>Likes: {blog.numberOfLikes}</span>
+                            <span> ======= </span>
+                            <span>Dislikes: {blog.numberOfDisLikes}</span>
+                        </div>
+                        <button className='btn btn-primary me-2' onClick={(e) => handleLike(blog.id, e)}>Like</button>
+                        <button className='btn btn-danger' onClick={(e) => handleDislike(blog.id, e)}>Dislike</button>
+
+                    </div>
                 ))}
+                {/* </div>
+                </div> */}
             </div>
         </>
     );

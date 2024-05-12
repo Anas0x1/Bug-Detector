@@ -1,26 +1,19 @@
-// networkScanSlice.js
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { axiosInstance } from './axios-instance';
 export const scanNetwork = createAsyncThunk(
   'networkScan/scan',
   async (url) => {
     try {
-      const response = await fetch("https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/FreeNetworkScan", {
-        method: 'POST',
+      const response = await axiosInstance.post("https://localhost:7268/api/Scan/FreeNetworkScan", {
+        url
+      }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url })
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-
-      const data = await response.json();
-      
-      return data;
+      return response.data;
     } catch (error) {
       throw error;
     }

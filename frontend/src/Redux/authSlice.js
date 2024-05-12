@@ -1,26 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { axiosInstance } from './axios-instance';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await fetch('https://redesigned-spork-wr7j77wq6w6gf5g6j-5220.app.github.dev/api/Account/Login', {
-        method: 'POST',
+      const response = await axiosInstance.post('https://localhost:7268/api/Account/Login', credentials, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to login');
-      }
-
-      const data = await response.json();
-      const { user, token } = data; 
-
-     
+      const { user, token } = response.data;
       localStorage.setItem('authToken', token);
 
       return { user, token };
@@ -30,26 +22,17 @@ export const login = createAsyncThunk(
   }
 );
 
-
-
 export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await fetch('https://redesigned-spork-wr7j77wq6w6gf5g6j-5220.app.github.dev/api/Account/Register', {
-        method: 'POST',
+      const response = await axiosInstance.post('https://localhost:7268/api/Account/Register', userData, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData)
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to register');
-      }
-
-      const data = await response.json();
-      return data;  
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -92,7 +75,6 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
-        
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
