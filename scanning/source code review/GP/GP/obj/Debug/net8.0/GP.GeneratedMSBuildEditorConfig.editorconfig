@@ -16,6 +16,6 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GP
-build_property.ProjectDir = C:\Users\zezooo\Desktop\theLastOne\GP\GP\
+build_property.ProjectDir = c:\graduation project\Bug-Detector\scanning\source code review\GP\GP\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

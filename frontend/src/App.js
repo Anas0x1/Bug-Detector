@@ -12,6 +12,7 @@ import Webpage from "./pages/Webpage";
 import Sourcecode from "./pages/Sourcecode";
 import UserAccount from "./pages/UserAccount";
 import PaymentCard from "./pages/PaymentCard";
+import Read from "./pages/Read";
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/scanner/sourcecode" element={<Sourcecode />} />
           <Route path="/useraccount" element={<UserAccount/>}/>
           <Route path="/pricing/payment" element={<PaymentCard/>}/>
+          <Route path="/readblog" element={<Read/>}/>
         </Routes>
       </BrowserRouter>
       </Provider>

@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { axiosInstance } from './axios-instance';
+import axios from 'axios';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axiosInstance.post('https://localhost:7268/api/Account/Login', credentials, {
+      const response = await axios.post("https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -26,7 +27,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axiosInstance.post('https://localhost:7268/api/Account/Register', userData, {
+      const response = await axiosInstance.post('https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Account/Register', userData, {
         headers: {
           'Content-Type': 'application/json'
         }

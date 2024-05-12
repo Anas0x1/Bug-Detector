@@ -4,7 +4,7 @@ import { fetchAllBlogs, selectAllBlogs, selectBlogsLoading, selectBlogsError, ad
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import BlogCard from '../cardBlog/BlogCard';
-
+import "./blogs.css"
 const Blogs = () => {
     const MySwal = withReactContent(Swal);
     const dispatch = useDispatch();
@@ -17,6 +17,8 @@ const Blogs = () => {
     const loading = useSelector((state) => selectBlogsLoading(state));
     const error = useSelector((state) => selectBlogsError(state));
     const token = useSelector((state) => state.auth.token);
+    let Like =<i className="fa-regular fa-thumbs-up"></i>;
+    let disLike=<i className="fa-regular fa-thumbs-down"></i>;
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -31,36 +33,33 @@ const Blogs = () => {
             title: "Blog added successfully",
             icon: "success"
         });
+        window.location.reload();
     };
 
     const handleLike = (blogid, e) => {
         dispatch(addLike({ blogid }));
-        MySwal.fire({
-          title: "Like added successfully",
-          icon: "success"
-        });
+      
+        
       };
       const handleDislike = (blogid, e) => {
         dispatch(addDislike({ blogid }));
-        MySwal.fire({
-          title: "Dislike added successfully",
-          icon: "success"
-        });
+      
+        
       };
     
 
     if (loading) {
         return <div className="spinner-border text-light" role="status">
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only" style={{color:"white"}}>Loading...</span>
         </div>;
     }
 
     return (
         <>
-            <div className="container search-input" style={{ marginTop: "5%" }}>
-                <input type="text" placeholder="Search" id="search-on-blogs" />
+            <div className="container search-input" style={{ marginTop: "10%" }}>
+                <input type="text" placeholder="Search" id="search-on-blogs" style={{outline:"none",border:"none",width:"50%",borderRadius:"2px" ,marginRight:"3px",height:"40px"}} />
 
-                {token && <button type="button" className="btn btn-success" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                {token && <button type="button" className="btn btn-success mt-3 mt-md-0" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i className="fa-solid fa-plus"></i> Add Blog
 
                 </button>}
@@ -86,7 +85,7 @@ const Blogs = () => {
                             </div>
 
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-success p-2" id="Publish-btn" onClick={handleAddBlog}>
+                                <button  className="btn btn-success p-2" id="Publish-btn" onClick={handleAddBlog}>
                                     <small style={{ width: '50%' }}>Publish</small>
                                 </button>
                             </div>
@@ -97,16 +96,17 @@ const Blogs = () => {
             <div className='container d-flex flex-wrap justify-content-between'>
                 {/* <div className='row'>
                     <div className='col col-sm-3 mt-2 mb-2' > */}
-                {blogs.map((blog, index) => (
+             
+                {
+
+                blogs.map((blog, index) => (
                     <div className='mt-3' key={index}>
                         <BlogCard title={blog.title} content={blog.content} />
-                        <div className='text-light'>
-                            <span>Likes: {blog.numberOfLikes}</span>
-                            <span> ======= </span>
-                            <span>Dislikes: {blog.numberOfDisLikes}</span>
-                        </div>
-                        <button className='btn btn-primary me-2' onClick={(e) => handleLike(blog.id, e)}>Like</button>
-                        <button className='btn btn-danger' onClick={(e) => handleDislike(blog.id, e)}>Dislike</button>
+                      
+                        <span className='me-2'onClick={(e) => handleLike(blog.id, e)} style={{color:"blue"}}>{Like}</span>
+                        <span className='me-2' style={{color:"white"}}>{blog.numberOfLikes}</span>
+                        <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{color:"red"}}>{disLike}</span>
+                        <span style={{color:"white"}}>{blog.numberOfDisLikes}</span>
 
                     </div>
                 ))}
