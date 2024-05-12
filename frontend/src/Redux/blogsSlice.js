@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 //import axios from 'axios';
 import { axiosInstance } from './axios-instance';
-import axios from 'axios';
+
 
 export const addNewBlog = createAsyncThunk(
   'blogs/addNewBlog',
   async (blogData) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axios.post('https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Blogs/AddBlog', blogData);
+      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/AddBlog', blogData);
       return response.data;
     } catch (error) {
       throw error;
@@ -20,7 +20,7 @@ export const addLike = createAsyncThunk(
   async (blogid) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axiosInstance.post('https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Blogs/Like', blogid);
+      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/Like', blogid);
       return response.data;
     } catch (error) {
       throw error;
@@ -32,7 +32,7 @@ export const addDislike = createAsyncThunk(
   async (blogid) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axiosInstance.post('https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Blogs/DisLike', blogid);
+      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/DisLike', blogid);
       return response.data;
     } catch (error) {
       throw error;
@@ -45,7 +45,7 @@ export const fetchAllBlogs = createAsyncThunk(
   async () => {
     try {
       //const response = await axios.get('https://localhost:7268/api/Blogs/ReturnAllBlogs');
-      const response = await axiosInstance.get('https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
+      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
       return response.data;
     } catch (error) {
       throw error;

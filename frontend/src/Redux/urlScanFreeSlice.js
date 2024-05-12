@@ -5,7 +5,7 @@ export const scanUrl = createAsyncThunk(
   'urlScan/scanUrl',
   async (url) => {
     try {
-      const response = await axiosInstance.post('https://localhost:7268/api/Scan/FreeWebScan', {
+      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Scan/FreeWebScan', {
         url
       }, {
         headers: {

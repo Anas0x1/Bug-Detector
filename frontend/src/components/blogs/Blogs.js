@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllBlogs, selectAllBlogs, selectBlogsLoading, selectBlogsError, addNewBlog, addLike, addDislike } from '../../Redux/blogsSlice';
+import { fetchAllBlogs, selectAllBlogs, addNewBlog, addLike, addDislike } from '../../Redux/blogsSlice';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import BlogCard from '../cardBlog/BlogCard';
 import "./blogs.css"
+
 const Blogs = () => {
-    const MySwal = withReactContent(Swal);
+   
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,8 +14,6 @@ const Blogs = () => {
     }, [dispatch]);
 
     const blogs = useSelector((state) => selectAllBlogs(state));
-    const loading = useSelector((state) => selectBlogsLoading(state));
-    const error = useSelector((state) => selectBlogsError(state));
     const token = useSelector((state) => state.auth.token);
     let Like =<i className="fa-regular fa-thumbs-up"></i>;
     let disLike=<i className="fa-regular fa-thumbs-down"></i>;
@@ -26,14 +24,46 @@ const Blogs = () => {
     console.log(blogs)
 
     const handleAddBlog = () => {
+        if(title&&content){
         dispatch(addNewBlog({ title, content }));
         setTitle('');
         setContent('');
-        MySwal.fire({
-            title: "Blog added successfully",
-            icon: "success"
-        });
-        window.location.reload();
+        
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            title: "blog add",
+          });
+         
+    }
+    else {
+        
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "info",
+            title: "fill up the data",
+          });
+    }
     };
 
     const handleLike = (blogid, e) => {
@@ -43,16 +73,9 @@ const Blogs = () => {
       };
       const handleDislike = (blogid, e) => {
         dispatch(addDislike({ blogid }));
-      
         
       };
     
-
-    if (loading) {
-        return <div className="spinner-border text-light" role="status">
-            <span className="sr-only" style={{color:"white"}}>Loading...</span>
-        </div>;
-    }
 
     return (
         <>
@@ -94,27 +117,27 @@ const Blogs = () => {
                 </div>
             </div>
             <div className='container d-flex flex-wrap justify-content-between'>
-                {/* <div className='row'>
-                    <div className='col col-sm-3 mt-2 mb-2' > */}
-             
-                {
-
-                blogs.map((blog, index) => (
-                    <div className='mt-3' key={index}>
-                        <BlogCard title={blog.title} content={blog.content} />
-                      
-                        <span className='me-2'onClick={(e) => handleLike(blog.id, e)} style={{color:"blue"}}>{Like}</span>
-                        <span className='me-2' style={{color:"white"}}>{blog.numberOfLikes}</span>
-                        <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{color:"red"}}>{disLike}</span>
-                        <span style={{color:"white"}}>{blog.numberOfDisLikes}</span>
-
+                {blogs.length > 0 ? (
+                    blogs.map((blog, index) => (
+                        <div className='mt-3' key={index}>
+                            <BlogCard title={blog.title} content={blog.content} />
+                            <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
+                            <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
+                            <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
+                            <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
+                        </div>
+                    ))
+                ) : (
+                    <div className="spinner-border text-light" role="status" style={{marginBottom:"1000px",justifyContent:"center"}}>
+                    <span className="sr-only" style={{color:"white"}}>Loading...</span>
                     </div>
-                ))}
-                {/* </div>
-                </div> */}
+                )}
             </div>
+          
         </>
+    
     );
+    
 };
 
 export default Blogs;

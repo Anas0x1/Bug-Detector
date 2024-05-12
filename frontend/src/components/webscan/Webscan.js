@@ -1,7 +1,7 @@
 import "./webscan.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { scanPrUrl } from "../../Redux/urlScanPSlice";
+
 import { scanUrl } from "../../Redux/urlScanFreeSlice";
 import Swal from "sweetalert2";
 
@@ -16,6 +16,7 @@ function Webscan() {
   const handleScanUrl = () => {
     if (token) {
       dispatch(scanUrl(url));
+      console.log(result);
     } else {
       const Toast = Swal.mixin({
         toast: true,
@@ -34,9 +35,7 @@ function Webscan() {
       });
     }
   };
-  const handlePremiumScanUrl = () => {
-    dispatch(scanPrUrl(url));
-  };
+
 
   return (
     <>
@@ -68,14 +67,7 @@ function Webscan() {
             >
               Free Scan
             </button>
-            <button
-              type="button"
-              className="btn btn-success"
-              style={{ marginLeft: "10px" }}
-              onClick={handlePremiumScanUrl}
-            >
-              Preimum Scan
-            </button>
+            
           </div>
 
           <div className="input-group-append" style={{ marginLeft: "10px" }}>

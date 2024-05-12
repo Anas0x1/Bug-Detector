@@ -17,6 +17,7 @@ function Networkscan()
   const handleSubmit = () => {
     if(token){
     dispatch(scanNetwork(url));
+    console.log(result);
     }
     else {
       const Toast = Swal.mixin({
