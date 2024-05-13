@@ -36,13 +36,12 @@ function Webscan() {
     }
   };
 
-
   return (
     <>
       <div className="container">
         <div
           className="row"
-          style={{ marginTop: "150px", marginBottom: "100px" }}
+          style={{ marginTop: "100px", marginBottom: "80px" }}
         >
           <h3 style={{ color: "aliceblue" }}>Web Application Scanner</h3>
         </div>
@@ -65,9 +64,8 @@ function Webscan() {
               className="btn btn-success"
               onClick={handleScanUrl}
             >
-              Free Scan
+              Scan
             </button>
-            
           </div>
 
           <div className="input-group-append" style={{ marginLeft: "10px" }}>
@@ -203,7 +201,37 @@ function Webscan() {
             </div>
           </div>
         )}
-        {status === "succeeded" && <div>{JSON.stringify(result)}</div>}
+        {status === "succeeded" && (
+          <div style={{width:"1000px",height:"1000px"}}>
+          <div className="table-responsive-sm" >
+         
+              <table className="table table-sm table-striped" >
+             
+                <tbody >
+                  <tr>
+                    <th scope="row" style={{ color: "red" }} >
+                      Title 
+                    </th>
+                    <td >{JSON.stringify(result.title)}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style={{ color: "red" }}>
+                      Description
+                    </th>
+                    <td>{JSON.stringify(result.details)}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style={{ color: "red" }}>
+                      Output 
+                    </th>
+                    <td>{JSON.stringify(result.output)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+        
+        )}
         {status === "failed" && (
           <div
             className="alert alert-warning"

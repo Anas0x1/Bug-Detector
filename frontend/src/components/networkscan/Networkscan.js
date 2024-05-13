@@ -48,7 +48,7 @@ function Networkscan()
     <div className="container">
         <div
           className="row"
-          style={{ marginTop: "150px", marginBottom: "100px" }}
+          style={{ marginTop: "100px", marginBottom: "80px" }}
         >
           <h3 style={{ color: "aliceblue" }}>Network Scanner</h3>
         </div>
@@ -71,18 +71,10 @@ function Networkscan()
               type="submit"
               onClick={handleSubmit}
             >
-            Free Scan
+            Scan
             </button>
 
-            <button
-            
-              className="btn btn-success "
-              style={{ marginLeft: "10px" }}
-              type="submit"
-              onClick={handleSubmitPremium}
-            >
-            Premium scan
-            </button>
+     
             
           </div>
 
@@ -219,7 +211,37 @@ function Networkscan()
             </div>
           </div>
         )}
-        {status === "succeeded" && <div>{JSON.stringify(result, null, 2)}</div>}
+         {status === "succeeded" && (
+          <div style={{width:"1000px",height:"1000px"}}>
+          <div className="table-responsive-sm" >
+         
+              <table className="table table-sm table-striped" >
+             
+                <tbody >
+                  <tr>
+                    <th scope="row" style={{ color: "red" }} >
+                      Title 
+                    </th>
+                    <td >{JSON.stringify(result.title)}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style={{ color: "red" }}>
+                      Description
+                    </th>
+                    <td>{JSON.stringify(result.details)}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style={{ color: "red" }}>
+                      Output 
+                    </th>
+                    <td>{JSON.stringify(result.output)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+        
+        )}
         {status === "failed" && (
           <div
             className="alert alert-danger"

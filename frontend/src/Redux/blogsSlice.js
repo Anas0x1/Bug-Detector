@@ -20,7 +20,7 @@ export const addLike = createAsyncThunk(
   async (blogid) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/Like', blogid);
+      const response = await axiosInstance.post('https://potential-computing-machine-q7qgqqw5w77wfx6w6-5220.app.github.dev/api/Blogs/Like', blogid);
       return response.data;
     } catch (error) {
       throw error;
@@ -45,7 +45,7 @@ export const fetchAllBlogs = createAsyncThunk(
   async () => {
     try {
       //const response = await axios.get('https://localhost:7268/api/Blogs/ReturnAllBlogs');
-      const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
+      const response = await axiosInstance.post('https://potential-computing-machine-q7qgqqw5w77wfx6w6-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
       return response.data;
     } catch (error) {
       throw error;

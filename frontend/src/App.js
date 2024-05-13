@@ -25,7 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/scanner" element={<Scan />} />
-          <Route path="/pricing" element={<PricingPage />} />
+          {/* <Route path="/pricing" element={<PricingPage />} /> */}
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/contectus" element={<ContectUsPage />} />
           <Route path="/scanner/network" element={<Networkpage />} />

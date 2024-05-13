@@ -32,9 +32,9 @@ function Nav() {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/blogs" target="blank">Blogs</Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link to="/pricing" className="nav-link text-white" target="blank">Pricing</Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to="/contectus" className="nav-link text-white" target="blank">Contact us</Link>
               </li>

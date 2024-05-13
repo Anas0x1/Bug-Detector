@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axios.post("https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Account/Login", credentials, {
+      const response = await axios.post("https://potential-computing-machine-q7qgqqw5w77wfx6w6-5220.app.github.dev/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
         }
