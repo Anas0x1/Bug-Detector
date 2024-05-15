@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { axiosInstance } from './axios-instance';
 import axios from 'axios';
 
 export const login = createAsyncThunk(
@@ -27,7 +26,25 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axiosInstance.post('https://sturdy-garbanzo-wr7j77wq66vx3944x-5220.app.github.dev/api/Account/Register', userData, {
+      const response = await axios.post('https://potential-computing-machine-q7qgqqw5w77wfx6w6-5220.app.github.dev/api/Account/Register', userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// New thunk for generating OTP
+export const generateOTP = createAsyncThunk(
+  'auth/generateOTP',
+  async (email) => {
+    try {
+      const response = await axios.post('https://potential-computing-machine-q7qgqqw5w77wfx6w6-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -78,6 +95,19 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(register.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      // Add extra reducers for generateOTP
+      .addCase(generateOTP.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(generateOTP.fulfilled, (state) => {
+        state.loading = false;
+        // You can handle OTP generation success here if needed
+      })
+      .addCase(generateOTP.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

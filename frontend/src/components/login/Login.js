@@ -82,13 +82,17 @@ function Login() {
 
             <button
               className="btn-login"
-              onClick={handleLogin} disabled={loading}
+              onClick={handleLogin} 
             >
               Login
             </button>
-            {error && <p style={{ color: "white" }}>{error}</p>}
-
-            <div className="log-in-another">
+           
+            {
+              loading&&<div className="spinner-border text-light" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            }
+            {/* <div className="log-in-another">
               <span className="btn btn-light">
                 <i
                   className="fa-brands fa-facebook "
@@ -98,7 +102,7 @@ function Login() {
               <span className="btn btn-light">
                 <i className="fa-brands fa-google" style={{ color: "#2555a2" }}></i>
               </span>
-            </div>
+            </div> */}
             <div className="new-users">
               <Link to="/sign" style={{ textDecoration: "none" }}>
                 New BugDetector?
