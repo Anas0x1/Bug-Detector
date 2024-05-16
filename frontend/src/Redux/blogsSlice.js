@@ -8,7 +8,7 @@ export const addNewBlog = createAsyncThunk(
   async (blogData) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axiosInstance.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
+      const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/AddBlog', blogData);
       return response.data;
     } catch (error) {
       throw error;
@@ -20,7 +20,7 @@ export const deleteBlog = createAsyncThunk(
   async (blogid) => {
       try {
           //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-          const response = await axiosInstance.delete('https://localhost:7268/api/Blogs/DeleteBlog',
+          const response = await axiosInstance.delete('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/DeleteBlog',
               { data: { blogId: blogid} }
           );
           return response.data;
@@ -33,7 +33,7 @@ export const getBlog = createAsyncThunk(
   'blogs/getBlog',
   async (blogid) => {
     try {
-      const response = await axiosInstance.post('https://localhost:7268/api/Blogs/ReturnOneBlog', blogid);
+      const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/ReturnOneBlog', blogid);
       //const response = await axiosInstance.post('https://congenial-yodel-wr7j77wq66xg3w6j-5220.app.github.dev/api/Blogs/ReturnOneBlog', blogData);
       return response.data;
     } catch (error) {
@@ -47,7 +47,7 @@ export const addLike = createAsyncThunk(
   async (blogid) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axiosInstance.post('https://localhost:7268/api/Blogs/Like', blogid);
+      const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/Like', blogid);
       return response.data;
     } catch (error) {
       throw error;
@@ -59,7 +59,7 @@ export const addDislike = createAsyncThunk(
   async (blogid) => {
     try {
       //const response = await axios.post('https://localhost:7268/api/Blogs/AddBlog', blogData);
-      const response = await axiosInstance.post('https://localhost:7268/api/Blogs/DisLike', blogid);
+      const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/DisLike', blogid);
       return response.data;
     } catch (error) {
       throw error;
@@ -72,7 +72,7 @@ export const fetchAllBlogs = createAsyncThunk(
   async () => {
     try {
       //const response = await axios.get('https://localhost:7268/api/Blogs/ReturnAllBlogs');
-      const response = await axiosInstance.get('https://localhost:7268/api/Blogs/ReturnAllBlogs');
+      const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
       return response.data;
     } catch (error) {
       throw error;

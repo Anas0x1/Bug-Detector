@@ -4,11 +4,6 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 
 export default function BlogCard(props) {
-
-  const handleDelete = () => {
-
-
-  }
   return (
     <>
       <div className="card" style={{ height: "300px", width: "400px", overflow: "auto" }}>
