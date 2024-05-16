@@ -12,7 +12,7 @@ export const scanPrUrl = createAsyncThunk(
     }
 
     try {
-      const response = await fetch('https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/PremiumWebScan', {
+      const response = await fetch('https://localhost:7268/api/Scan/PremiumWebScan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

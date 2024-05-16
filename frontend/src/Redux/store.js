@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authSlice';
 import blogsReducer from './blogsSlice'; // Import the blogsSlice reducer
+import commentReducer from './commentSlice';
 import urlScanReducer from "./urlScanFreeSlice";
 import urlScanPReducer from "./urlScanPSlice";
 import networkScanReducer from "./networkFreeSlice";
@@ -10,6 +11,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     blogs: blogsReducer, 
+    comment: commentReducer, 
     urlScan: urlScanReducer,
     urlPscan: urlScanPReducer,
     networkScan: networkScanReducer,

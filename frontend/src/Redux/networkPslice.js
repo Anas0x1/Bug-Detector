@@ -5,7 +5,7 @@ export const scanPremiumNetwork = createAsyncThunk(
   'networkPScan/scan',
   async (url) => {
     try {
-      const response = await fetch("https://upgraded-spork-r5w955wxwqqhx55p-5220.app.github.dev/api/Scan/PremiumNetworkScan", {
+      const response = await fetch("https://localhost:7268/api/Scan/PremiumNetworkScan", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
