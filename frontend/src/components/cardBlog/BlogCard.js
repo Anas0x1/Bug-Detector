@@ -6,7 +6,7 @@ import moment from 'moment';
 export default function BlogCard(props) {
   return (
     <>
-      <div className="card" style={{ height: "300px", width: "400px", overflow: "auto" }}>
+      <div className="card" style={{ height: "200px", width: "400px", overflow: "auto" }}>
 
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>

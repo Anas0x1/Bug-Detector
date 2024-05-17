@@ -69,6 +69,7 @@ function Networkscan() {
             className="btn btn-success "
             type="submit"
             onClick={handleSubmit}
+            style={{width:"100px",maxWidth:"100px"}}
           >
             Scan
           </button>
@@ -211,7 +212,7 @@ function Networkscan() {
         </div>
       )}
       {status === "succeeded" && (
-        <div style={{ width: "1000px", height: "1000px" }}>
+        <div style={{ width: "1000px", height: "1000px",marginLeft:"80px" }}>
           <div className="table-responsive-sm" >
 
             <table className="table table-sm table-striped" >
@@ -224,7 +225,8 @@ function Networkscan() {
                   <td >{JSON.stringify(result.title)}</td>
                 </tr>
                 <tr>
-                  <th scope="row" style={{ color: "red" }}>
+                  <th  style={{ color: "red", maxHeight: "100px",
+           overflowY:"auto"}}>
                     Description
                   </th>
                   <td>{JSON.stringify(result.details)}</td>

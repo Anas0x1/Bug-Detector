@@ -72,7 +72,7 @@ export const fetchAllBlogs = createAsyncThunk(
   async () => {
     try {
       //const response = await axios.get('https://localhost:7268/api/Blogs/ReturnAllBlogs');
-      const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
+      const response = await axiosInstance.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
       return response.data;
     } catch (error) {
       throw error;

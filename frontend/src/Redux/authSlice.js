@@ -6,7 +6,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axios.post("https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Account/Login", credentials, {
+      const response = await axios.post("https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -26,7 +26,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axios.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Account/Register', userData, {
+      const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Register', userData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -44,7 +44,7 @@ export const generateOTP = createAsyncThunk(
   'auth/generateOTP',
   async (email) => {
     try {
-      const response = await axios.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+      const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }

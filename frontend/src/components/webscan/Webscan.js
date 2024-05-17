@@ -15,8 +15,26 @@ function Webscan() {
 
   const handleScanUrl = () => {
     if (token) {
+      if(url)
       dispatch(scanUrl(url));
-      console.log(result);
+    else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "info",
+        title: "Enter a URL or Domain",
+      });
+    }
+  
     } else {
       const Toast = Swal.mixin({
         toast: true,
@@ -46,8 +64,11 @@ function Webscan() {
           <h3 style={{ color: "aliceblue" }}>Web Application Scanner</h3>
         </div>
       </div>
-      <div className="container">
-        <h4 style={{ color: "aliceblue" }}>Enter Target</h4>
+      <div className="container"><h4 style={{ color: "aliceblue" }}>Enter Target</h4></div>
+      
+      <div className="container" style={{display:"flex"}}>
+        
+        
         <div className="input-group mb-3 group">
           <input
             type="text"
@@ -63,12 +84,13 @@ function Webscan() {
               type="button"
               className="btn btn-success"
               onClick={handleScanUrl}
+              style={{width:"100px",maxWidth:"100px"}}
             >
               Scan
             </button>
           </div>
 
-          <div className="input-group-append" style={{ marginLeft: "10px" }}>
+          {token&&<div className="input-group-append" style={{ marginLeft: "10px" }}>
             <button
               type="button"
               className="btn btn-success"
@@ -78,7 +100,7 @@ function Webscan() {
             >
               Schedule <i className="fa-regular fa-clock"></i>
             </button>
-          </div>
+          </div>}
         </div>
       </div>
 
@@ -202,9 +224,8 @@ function Webscan() {
           </div>
         )}
         {status === "succeeded" && (
-          <div style={{width:"1000px",height:"1000px"}}>
-          <div className="table-responsive-sm" >
-         
+          <div style={{width:"1000px",height:"1000px" ,marginLeft:"80px"}}>
+          <div className="table-responsive-sm ">
               <table className="table table-sm table-striped" >
              
                 <tbody >
@@ -215,8 +236,8 @@ function Webscan() {
                     <td >{JSON.stringify(result.title)}</td>
                   </tr>
                   <tr>
-                    <th scope="row" style={{ color: "red" }}>
-                      Description
+                    <th scope="row" style={{ color: "red"}}>
+                      Description 
                     </th>
                     <td>{JSON.stringify(result.details)}</td>
                   </tr>
@@ -236,9 +257,10 @@ function Webscan() {
           <div
             className="alert alert-warning"
             role="alert"
-            style={{ width: "300px" }}
+            style={{ width: "300px" ,marginLeft:'100px' }}
           >
-            Faild to scan try again !!!! {error}
+            Faild to scan try again !!!! 
+            {error}
           </div>
         )}
       </div>
