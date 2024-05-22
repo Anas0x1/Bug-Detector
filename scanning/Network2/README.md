@@ -1,1 +1,1 @@
-sudo ./main.sh <IP OR CIDR>
+sudo ./main.sh "IP OR CIDR"
