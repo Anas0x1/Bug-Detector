@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllBlogs, selectAllBlogs, addNewBlog, addLike, addDislike,deleteBlog } from '../../Redux/blogsSlice';
+import { fetchAllBlogs, selectAllBlogs, addNewBlog, addLike, addDislike, deleteBlog } from '../../Redux/blogsSlice';
 import Swal from 'sweetalert2';
 import BlogCard from '../cardBlog/BlogCard';
 import "./blogs.css"
@@ -9,20 +9,31 @@ const Blogs = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchAllBlogs());
-    }, [dispatch]);
 
     const blogs = useSelector((state) => selectAllBlogs(state));
     const token = useSelector((state) => state.auth.token);
     let Like = <i className="fa-regular fa-thumbs-up"></i>;
     let disLike = <i className="fa-regular fa-thumbs-down"></i>;
 
+    const [search, setSearch] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    console.log("blogs")
-    console.log(blogs)
+    const [filteredBlogs, setFilteredBlogs] = useState(blogs);
 
+    useEffect(() => {
+        dispatch(fetchAllBlogs());
+        if (search !== '') {
+            setFilteredBlogs(blogs.filter(item =>
+                item.title.toLowerCase().includes(search.toLowerCase()) ||
+                item.content.toLowerCase().includes(search.toLowerCase())
+            ));
+        }
+    }, [blogs, search, dispatch]);
+
+    const handleSearch = (e) => {
+        console.log(e.target.value)
+        setSearch(e.target.value)
+    };
     const handleAddBlog = () => {
         if (title && content) {
             dispatch(addNewBlog({ title, content })).then(() => {
@@ -85,20 +96,29 @@ const Blogs = () => {
     const handleDelete = (blogid, e) => {
         e.preventDefault();
         dispatch(deleteBlog(blogid))
-        .then(() => {
-          dispatch(fetchAllBlogs());
-        });
-      };
+            .then(() => {
+                dispatch(fetchAllBlogs());
+            });
+    };
 
     return (
         <>
             <div className="container search-input" style={{ marginTop: "10%" }}>
-                <input type="text" placeholder="Search" id="search-on-blogs" style={{ outline: "none", border: "none", width: "50%", borderRadius: "2px", marginRight: "3px", height: "40px" }} />
+                <div className='row justify-content-between w-100'>
+                    <div className='col-lg-6'>
+                        <input className='w-100' type="text" value={search} onChange={(e) => handleSearch(e)} placeholder="Search" id="search-on-blogs" style={{ outline: "none", border: "none", width: "50%", borderRadius: "2px", marginRight: "3px", height: "40px" }} />
 
-                {token && <button type="button" className="btn btn-success mt-3 mt-md-0" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i className="fa-solid fa-plus"></i> Add Blog
+                    </div>
 
-                </button>}
+                    {token &&
+                        <div className='col-lg-2'>
+                            <button type="button" className="w-100 h-100 btn btn-success mt-3 mt-md-0" id="btn-schedule" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i className="fa-solid fa-plus"></i> Add Blog
+                            </button>
+                        </div>
+                    }
+                </div>
+
 
 
 
@@ -129,7 +149,47 @@ const Blogs = () => {
                     </div>
                 </div>
             </div>
-            <div className='container d-flex flex-wrap justify-content-evenly'>
+
+            <div className='container d-flex flex-wrap justify-content-start'>
+                {search ? (
+                    filteredBlogs.length > 0 ? (
+                        filteredBlogs.map((blog, index) => (
+                            <div className='mt-3 me-4' key={index}>
+                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} />
+                                <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
+                                <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
+                                <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
+                                <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
+                                <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
+                                    <i className="fa-solid fa-trash mx-2"></i>
+                                </span>
+                            </div>))
+                    ) : (
+                        <div className='text-light mx-auto display-6'>No blogs found for the search term</div>
+                    )
+                ) : (
+                    blogs.length > 0 ? (
+                        blogs.map((blog, index) => (
+                            <div className='mt-3 me-4' key={index}>
+                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} />
+                                <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
+                                <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
+                                <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
+                                <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
+                                <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
+                                    <i className="fa-solid fa-trash mx-2"></i>
+                                </span>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="spinner-border text-light" role="status" style={{ marginBottom: "1000px", justifyContent: "center" }}>
+                            <span className="sr-only" style={{ color: "white" }}>Loading...</span>
+                        </div>
+                    )
+                )}
+            </div>
+
+            {/* <div className='container d-flex flex-wrap justify-content-evenly'>
                 {blogs.length > 0 ? (
                     blogs.map((blog, index) => (
                         <div className='mt-3' key={index}>
@@ -148,7 +208,7 @@ const Blogs = () => {
                         <span className="sr-only" style={{ color: "white" }}>Loading...</span>
                     </div>
                 )}
-            </div>
+            </div> */}
         </>
     );
 };

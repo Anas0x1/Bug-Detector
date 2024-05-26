@@ -4,3 +4,52 @@ scale: 1 !important;
 #btn-scan{
   padding: 5px !important;
 }
+.pagination-container {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.pagination-previous,
+.pagination-next,
+.pagination-page {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #212529;
+}
+
+.pagination-previous a,
+.pagination-next a {
+  text-decoration: none !important;
+  color:#fff;
+}
+
+.pagination-break {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+.pagination-previous:hover,
+.pagination-next:hover,
+.pagination-page:hover {
+  color: #fff;
+  background-color: #424649;
+}
+
+.active {
+  color: #fff;
+  background-color: #424649;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled a {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

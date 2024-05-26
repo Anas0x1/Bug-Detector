@@ -76,9 +76,9 @@ function Login() {
               <input type="password" name="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
 
-            <span className="btn-cadastre-se" href="/" >
+            <Link className="btn-cadastre-se" to={"/forgetpassword"} >
               Forget password?
-            </span>
+            </Link>
 
             <button
               className="btn-login"
@@ -89,7 +89,7 @@ function Login() {
            
             {
               loading&&<div className="spinner-border text-light" role="status">
-              <span class="sr-only">Loading...</span>
+              <span className="sr-only">Loading...</span>
             </div>
             }
             {/* <div className="log-in-another">

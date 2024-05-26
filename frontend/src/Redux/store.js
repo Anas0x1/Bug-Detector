@@ -6,6 +6,8 @@ import urlScanReducer from "./urlScanFreeSlice";
 import urlScanPReducer from "./urlScanPSlice";
 import networkScanReducer from "./networkFreeSlice";
 import networkPSliceReducer from './networkPslice';
+import messageSliceReducer from './messageSlice';
+import userSliceReducer from './userSlice';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ const store = configureStore({
     urlPscan: urlScanPReducer,
     networkScan: networkScanReducer,
     networkPScan: networkPSliceReducer,
+    message:messageSliceReducer,
+    user:userSliceReducer,
   }
 });
 

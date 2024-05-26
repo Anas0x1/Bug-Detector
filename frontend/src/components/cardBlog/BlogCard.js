@@ -10,7 +10,12 @@ export default function BlogCard(props) {
 
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
-          <p className="card-text" style={{ color: "black" }}>{props.content.slice(0, 300)} ...< Link className='read-btn' to={"/readblog/" + props.id}><i className="fa-solid fa-circle-right fa-beat ms-2 text-info"></i></Link></p>
+          <p className="card-text" style={{ color: "black" }}>
+            {props.content && props.content.slice(0, 150)} ...
+            < Link className='read-btn' to={"/readblog/" + props.id}>
+              <i className="fa-solid fa-circle-right fa-beat ms-2 text-info"></i>
+            </Link>
+          </p>
         </div>
         <div className="m-3 text-dark">
 

@@ -1,16 +1,20 @@
 import "./nav.css";
 import User from "./user.png";
 import bug from "./boxelder-bug.png";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../Redux/authSlice';
 
 function Nav() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.token); 
+  const user = useSelector(state => state.auth.token);
+  const userName = useSelector(state => state.auth.user);
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/login');
   };
 
   return (
@@ -40,12 +44,15 @@ function Nav() {
               </li>
             </ul>
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-            {user ? (
+              {user ? (
                 <>
-                
-                  <li className="nav-item" style={{marginRight:"10px"}}>
-                    <button className="nav-link  text-white" onClick={handleLogout} style={{color:"yellow"}}>Logout</button>
+                  <li className="nav-item text-light">
+                    <div className="nav-link text-white"><em>Welcome {userName}</em></div>
                   </li>
+                  <li className="nav-item" style={{ marginRight: "10px" }}>
+                    <button className="nav-link text-white" onClick={handleLogout} style={{ color: "yellow" }}>Logout</button>
+                  </li>
+
                   <li className="nav-item">
                     <Link to="/useraccount">
                       <img src={User} alt="/" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
@@ -53,11 +60,11 @@ function Nav() {
                   </li>
                 </>
               )
-               : (
-                <li className="nav-item" >
-                  <Link to="/login" className="nav-link text-warning" target="blank" style={{ marginLeft: "200px" }}>Log in</Link>
-                </li>
-              )}
+                : (
+                  <li className="nav-item" >
+                    <Link to="/login" className="nav-link text-warning" target="blank" style={{ marginLeft: "200px" }}>Log in</Link>
+                  </li>
+                )}
             </ul>
           </div>
         </div>

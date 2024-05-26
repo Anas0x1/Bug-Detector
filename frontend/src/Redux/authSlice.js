@@ -1,21 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import axios from 'axios';
+import { axiosInstance } from './axios-instance';
 
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axios.post("https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Login", credentials, {
+      // const response = await axios.post("https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/Login", credentials, {
+      const response = await axios.post("https://localhost:7268/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
 
-      const { user, token } = response.data;
+      const { userName, token } = response.data;
       localStorage.setItem('authToken', token);
+      localStorage.setItem('UserName', userName);
 
-      return { user, token };
+      return { userName, token };
     } catch (error) {
       throw error;
     }
@@ -26,7 +29,62 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Register', userData, {
+      // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/Register', userData, {
+      const response = await axios.post('https://localhost:7268/api/Account/Register', userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const changepassword = createAsyncThunk(
+  'auth/changepassword',
+  async (userData) => {
+    try {
+      // const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Register', userData, {
+      const response = await axiosInstance.post('https://localhost:7268/api/Account/ChangePassword', userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const forgetpassword = createAsyncThunk(
+  'auth/forgetpassword',
+  async (userData) => {
+    try {
+      // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/Register', userData, {
+      const response = await axios.post('https://localhost:7268/api/Account/ForgotPassword', userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// New thunk for generating OTP
+export const generateOTP = createAsyncThunk(
+  'auth/generateOTP',
+  async (email) => {
+    try {
+      // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+      const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTP', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -40,11 +98,12 @@ export const register = createAsyncThunk(
 );
 
 // New thunk for generating OTP
-export const generateOTP = createAsyncThunk(
-  'auth/generateOTP',
+export const generateOTPforForgetPassword = createAsyncThunk(
+  'auth/generateOTPforForgetPassword',
   async (email) => {
     try {
-      const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+      // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+      const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTPForForgotPassword', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -60,8 +119,8 @@ export const generateOTP = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
-    token: localStorage.getItem('authToken'), 
+    user: localStorage.getItem('UserName'),
+    token: localStorage.getItem('authToken'),
     loading: false,
     error: null
   },
@@ -69,7 +128,8 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.removeItem('authToken'); 
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('UserName');
     }
   },
   extraReducers: (builder) => {
@@ -80,7 +140,7 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
+        state.user = action.payload.userName;
         state.token = action.payload.token;
       })
       .addCase(login.rejected, (state, action) => {
@@ -98,16 +158,52 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-    
+
       .addCase(generateOTP.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(generateOTP.fulfilled, (state) => {
         state.loading = false;
-       
+
       })
       .addCase(generateOTP.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(generateOTPforForgetPassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(generateOTPforForgetPassword.fulfilled, (state) => {
+        state.loading = false;
+
+      })
+      .addCase(generateOTPforForgetPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(forgetpassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(forgetpassword.fulfilled, (state) => {
+        state.loading = false;
+
+      })
+      .addCase(forgetpassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(changepassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(changepassword.fulfilled, (state) => {
+        state.loading = false;
+
+      })
+      .addCase(changepassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

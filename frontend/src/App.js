@@ -15,6 +15,10 @@ import PaymentCard from "./pages/PaymentCard";
 import Read from "./pages/Read";
 import { Provider } from 'react-redux';
 import store from './Redux/store';
+import ForgetPassword from "./components/forgetpassword/forgetpassword";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
+import ReportPage from "./pages/ReportPage";
+
 function App() {
   return (
     <div>
@@ -27,10 +31,13 @@ function App() {
             <Route path="/scanner" element={<Scan />} />
             {/* <Route path="/pricing" element={<PricingPage />} /> */}
             <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/forgetpassword" element={<ForgetPassword />} />
+            <Route path="/changepassword" element={<ChangePasswordPage />} />
             <Route path="/contectus" element={<ContectUsPage />} />
             <Route path="/scanner/network" element={<Networkpage />} />
             <Route path="/scanner/web" element={<Webpage />} />
             <Route path="/scanner/sourcecode" element={<Sourcecode />} />
+            <Route path="/report/:reportId" element={<ReportPage />} />
             <Route path="/useraccount" element={<UserAccount />} />
             <Route path="/pricing/payment" element={<PaymentCard />} />
             <Route path="/readblog/:blogId" element={<Read />} />

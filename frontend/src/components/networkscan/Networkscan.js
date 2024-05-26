@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scanNetwork } from '../../Redux/networkFreeSlice';
 import { scanPremiumNetwork } from '../../Redux/networkPslice'
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import moment from 'moment';
+
 import Swal from 'sweetalert2';
 import "./networkscan.css"
 
 function Networkscan() {
+  const getTargetElement = () => document.getElementById('table-id');
 
   const [url, setUrl] = useState('');
   const dispatch = useDispatch();
@@ -13,6 +17,21 @@ function Networkscan() {
   const error = useSelector((state) => state.networkScan.error);
   const result = useSelector((state) => state.networkScan.result);
   const token = useSelector(state => state.auth.token);
+
+  console.log("result")
+  console.log(result)
+  const options = {
+    // default is Resolution.MEDIUM = 3, which should be enough, higher values
+    // increases the image quality but also the size of the PDF, so be careful
+    // using values higher than 10 when having multiple pages generated, it
+    // might cause the page to crash or hang.
+    resolution: Resolution.HIGH,
+    page: {
+      // margin is in MM, default is Margin.NONE = 0
+      margin: Margin.MEDIUM,
+    },
+    filename: url + ' scan ' + moment(new Date()).format('LLL') + '.pdf',
+  };
   const handleSubmit = () => {
     if (token) {
       dispatch(scanNetwork(url));
@@ -69,7 +88,7 @@ function Networkscan() {
             className="btn btn-success "
             type="submit"
             onClick={handleSubmit}
-            style={{width:"100px",maxWidth:"100px"}}
+            style={{ width: "100px", maxWidth: "100px" }}
           >
             Scan
           </button>
@@ -203,7 +222,7 @@ function Networkscan() {
         </div>
       </div>
     </div>
-    <div className="container output">
+    <div className="container output" id="table-id">
       {status === "loading" && (
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">
@@ -212,37 +231,59 @@ function Networkscan() {
         </div>
       )}
       {status === "succeeded" && (
-        <div style={{ width: "1000px", height: "1000px",marginLeft:"80px" }}>
+        <div className="mx-auto mt-3" style={{ width: "80%" }}>
           <div className="table-responsive-sm" >
 
             <table className="table table-sm table-striped" >
-
-              <tbody >
+              {result ? <tbody >
                 <tr>
                   <th scope="row" style={{ color: "red" }} >
                     Title
                   </th>
-                  <td >{JSON.stringify(result.title)}</td>
+                  <td >{result.title.replaceAll("<br>", "")}</td>
                 </tr>
                 <tr>
-                  <th  style={{ color: "red", maxHeight: "100px",
-           overflowY:"auto"}}>
+                  <th scope="row" style={{ color: "red" }}>
                     Description
                   </th>
-                  <td>{JSON.stringify(result.details)}</td>
+                  <td>{result.details.replaceAll("<br>", "")}</td>
                 </tr>
                 <tr>
                   <th scope="row" style={{ color: "red" }}>
                     Output
                   </th>
-                  <td>{JSON.stringify(result.output)}</td>
+                  <td>{result.output.replaceAll("<br>", "")}</td>
                 </tr>
-              </tbody>
+              </tbody> : <tbody>
+                <tr>
+                  <th scope="row" style={{ color: "red" }} >
+                    Title
+                  </th>
+                  <td ></td>
+                </tr>
+                <tr>
+                  <th scope="row" style={{ color: "red" }}>
+                    Description
+                  </th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row" style={{ color: "red" }}>
+                    Output
+                  </th>
+                  <td></td>
+                </tr>
+
+              </tbody>}
+
             </table>
           </div>
         </div>
 
       )}
+      {(status === "succeeded" && result) &&
+        <button style={{ marginLeft: "10%" }} className="btn btn-success" onClick={() => generatePDF(getTargetElement, options)}><i className="fa-solid fa-download fa-beat me-1"></i> Download</button>
+      }
       {status === "failed" && (
         <div
           className="alert alert-danger"

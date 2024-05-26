@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { register, generateOTP } from '../../Redux/authSlice';
+import { forgetpassword, generateOTPforForgetPassword } from '../../Redux/authSlice';
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import './sign.css';
+import './forgetpassword.css';
 
-function Sign() {
+function ForgetPassword() {
     const dispatch = useDispatch();
     const MySwal = withReactContent(Swal);
 
 
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        userName: '',
         email: '',
         password: '',
         otp: '',
@@ -24,7 +23,7 @@ function Sign() {
         PasswordErr: ""
     });
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{6,})/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_])(?=.{6,10})/;
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +31,7 @@ function Sign() {
             setErrors({
                 ...errors,
                 PasswordErr: !passwordRegex.test(e.target.value) &&
-                    "Password must be at least 6 characters.one alphanumerice,one lowercase and one uppercase"
+                    "Password must be 6-10 characters.one alphanumerice,one lowercase and one uppercase"
             });
         }
 
@@ -41,24 +40,22 @@ function Sign() {
 
     const handleSendCode = () => {
         if (formData.email) {
-            dispatch(generateOTP(formData.email))
-                .then((res) => {
-                    if (res.error === null) {
-                        MySwal.fire({
-                            icon: 'success',
-                            title: 'Code Sent',
-                            text: 'An Code has been sent to your email.',
-                        });
-                    } else {
-                        MySwal.fire({
-                            icon: 'error',
-                            title: 'Failed to Send Code',
-                            text: res.error.message || 'Something went wrong while sending the OTP.',
-                        });
-                    }
+            dispatch(generateOTPforForgetPassword(formData.email))
+                .then((response) => {
+                    console.log("response")
+                    console.log(response)
+                    MySwal.fire({
+                        icon: 'success',
+                        title: 'Code Sent',
+                        text: 'An Code has been sent to your email.',
+                    });
                 })
                 .catch((error) => {
-
+                    MySwal.fire({
+                        icon: 'error',
+                        title: 'Failed to Send Code',
+                        text: error.message || 'Something went wrong while sending the OTP.',
+                    });
                 });
         }
         else {
@@ -81,13 +78,13 @@ function Sign() {
             return;
         }
 
-        dispatch(register(formData))
+        dispatch(forgetpassword(formData))
             .then((response) => {
-                console.log(formData);
+                console.log(response);
                 if (!response.error) {
                     MySwal.fire({
                         icon: 'success',
-                        title: 'Registration Successful',
+                        title: 'Your password has been reset successfully',
                         text: 'Welcome to BugDetector',
                         showConfirmButton: false,
                         timer: 1500
@@ -97,7 +94,7 @@ function Sign() {
                 else {
                     MySwal.fire({
                         icon: 'error',
-                        title: 'Registration Failed',
+                        title: 'Failed to reset your password',
                         text: response.error.message || 'Something went wrong with registration',
                     });
                 }
@@ -107,39 +104,21 @@ function Sign() {
 
     return (
         <>
-            <div className="main-login1" >
+            <div className="main-login1" style={{marginTop:"20px"}} >
                 <div className="right-login1">
                     <div className="card-login1">
-                        <h1>Sign up</h1>
+                        <h1>Reset Password</h1>
                         <div className="textfield">
                             <label htmlFor="email">Email</label>
                             <input type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-                            <small><button style={{ marginTop: '5px', border: 'none', borderRadius: '3px' }} onClick={handleSendCode}>send code</button></small>
                         </div>
                         <div className="textfield">
-                            <label htmlFor="email">Verify Code</label>
-                            <input type="text" name="otp" placeholder="Enter the send code" value={formData.otp} onChange={handleChange} />
+                            <small><button className='btn btn-outline-light' style={{ marginTop: '5px' }} onClick={handleSendCode}>send code</button></small>
                         </div>
-                        {/* <div className="textfield">
-                            <label htmlFor="otp">Verify Email</label>
-                            <div style={{ display: "flex" }}>
-                                <input type="text" name="otp" placeholder="Enter the send code" style={{
-                                    padding: "15px",
-                                    background: "#514869",
-                                    color: "#f0ffffde",
-                                    fontSize: "12pt",
-                                    boxShadow: "0px 10px 40px #00000056",
-                                    outline: "none",
-                                    boxSizing: "border-box",
-                                    borderRadius: "10px",
-                                    border: 'none'
-                                }} />
-                            </div>
-                        </div> */}
 
                         <div className="textfield">
-                            <label htmlFor="userName">Username</label>
-                            <input type="text" name="userName" placeholder="Username" value={formData.userName} onChange={handleChange} />
+                            <label htmlFor="otp">Verify Code</label>
+                            <input type="text" name="otp" placeholder="Enter the send code" value={formData.otp} onChange={handleChange} />
                         </div>
 
                         <div className="textfield">
@@ -151,11 +130,7 @@ function Sign() {
                             <label htmlFor="confirmPassword">Confirm Password</label>
                             <input type="password" name="confirmPassword" placeholder="Confirm password" value={formData.confirmPassword} onChange={handleChange} />
                         </div>
-                        <button className="btn-login1" onClick={handleSubmit}>Sign up</button>
-                        <div className="new-users1">
-                            <Link to="/login" style={{ textDecoration: 'none' }} >Already have an account?</Link>
-                        </div>
-
+                        <button className="btn-login1 mt-4" onClick={handleSubmit}>Reset Password</button>
                     </div>
                 </div>
             </div>
@@ -163,4 +138,4 @@ function Sign() {
     );
 }
 
-export default Sign;
+export default ForgetPassword;

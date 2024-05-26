@@ -1,40 +1,57 @@
 import "./webscan.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import moment from 'moment';
 
 import { scanUrl } from "../../Redux/urlScanFreeSlice";
 import Swal from "sweetalert2";
 
 function Webscan() {
+
+
+  const getTargetElement = () => document.getElementById('table-id');
+
   const dispatch = useDispatch();
   const [url, setUrl] = useState("");
   const result = useSelector((state) => state.urlScan.result);
   const status = useSelector((state) => state.urlScan.status);
   const error = useSelector((state) => state.urlScan.error);
   const token = useSelector((state) => state.auth.token);
-
+  const options = {
+    // default is Resolution.MEDIUM = 3, which should be enough, higher values
+    // increases the image quality but also the size of the PDF, so be careful
+    // using values higher than 10 when having multiple pages generated, it
+    // might cause the page to crash or hang.
+    resolution: Resolution.HIGH,
+    page: {
+      // margin is in MM, default is Margin.NONE = 0
+      margin: Margin.MEDIUM,
+    },
+    filename: url + ' scan ' + moment(new Date()).format('LLL') + '.pdf',
+  };
   const handleScanUrl = () => {
     if (token) {
-      if(url)
-      dispatch(scanUrl(url));
-    else {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "info",
-        title: "Enter a URL or Domain",
-      });
-    }
-  
+      if (url)
+        dispatch(scanUrl(url));
+      else {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "info",
+          title: "Enter a URL or Domain",
+        });
+      }
+
     } else {
       const Toast = Swal.mixin({
         toast: true,
@@ -65,10 +82,10 @@ function Webscan() {
         </div>
       </div>
       <div className="container"><h4 style={{ color: "aliceblue" }}>Enter Target</h4></div>
-      
-      <div className="container" style={{display:"flex"}}>
-        
-        
+
+      <div className="container" style={{ display: "flex" }}>
+
+
         <div className="input-group mb-3 group">
           <input
             type="text"
@@ -84,13 +101,13 @@ function Webscan() {
               type="button"
               className="btn btn-success"
               onClick={handleScanUrl}
-              style={{width:"100px",maxWidth:"100px"}}
+              style={{ width: "100px", maxWidth: "100px" }}
             >
               Scan
             </button>
           </div>
 
-          {token&&<div className="input-group-append" style={{ marginLeft: "10px" }}>
+          {token && <div className="input-group-append" style={{ marginLeft: "10px" }}>
             <button
               type="button"
               className="btn btn-success"
@@ -101,6 +118,9 @@ function Webscan() {
               Schedule <i className="fa-regular fa-clock"></i>
             </button>
           </div>}
+          {(status === "succeeded" && result) &&
+            <button className="ms-3 btn btn-success rounded" onClick={() => generatePDF(getTargetElement, options)}><i className="fa-solid fa-download fa-beat me-1"></i> Download</button>
+          }
         </div>
       </div>
 
@@ -215,55 +235,79 @@ function Webscan() {
           </div>
         </div>
       </div>
-      <div className="conatiner output">
+
+      <div className="conatiner output" id="table-id">
         {status === "loading" && (
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mx-auto">
             <div className="spinner-border" role="status">
               <span className="sr-only">Loading...</span>
             </div>
           </div>
         )}
         {status === "succeeded" && (
-          <div style={{width:"1000px",height:"1000px" ,marginLeft:"80px"}}>
-          <div className="table-responsive-sm ">
+          <div className="mx-auto mt-3" style={{ width: "80%" }}>
+            <div className="table-responsive-sm ">
               <table className="table table-sm table-striped" >
-             
-                <tbody >
-                  <tr>
-                    <th scope="row" style={{ color: "red" }} >
-                      Title 
-                    </th>
-                    <td >{JSON.stringify(result.title)}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" style={{ color: "red"}}>
-                      Description 
-                    </th>
-                    <td>{JSON.stringify(result.details)}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" style={{ color: "red" }}>
-                      Output 
-                    </th>
-                    <td>{JSON.stringify(result.output)}</td>
-                  </tr>
-                </tbody>
+                {result ?
+                  <tbody>
+                    <tr>
+                      <th scope="row" style={{ color: "red" }} >
+                        Title
+                      </th>
+                      <td >{result.title.replaceAll("<br>", "")}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style={{ color: "red" }}>
+                        Description
+                      </th>
+                      <td>{result.details.replaceAll("<br>", "\n")}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style={{ color: "red" }}>
+                        Output
+                      </th>
+                      <td>{result.output.replaceAll("<br>", "")}</td>
+                    </tr>
+
+                  </tbody> : <tbody>
+                    <tr>
+                      <th scope="row" style={{ color: "red" }} >
+                        Title
+                      </th>
+                      <td ></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style={{ color: "red" }}>
+                        Description
+                      </th>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row" style={{ color: "red" }}>
+                        Output
+                      </th>
+                      <td></td>
+                    </tr>
+
+                  </tbody>}
               </table>
             </div>
-            </div>
-        
+          </div>
+
         )}
+
         {status === "failed" && (
           <div
             className="alert alert-warning"
             role="alert"
-            style={{ width: "300px" ,marginLeft:'100px' }}
+            style={{ width: "300px", marginLeft: '100px' }}
           >
-            Faild to scan try again !!!! 
+            Faild to scan try again !!!!
             {error}
           </div>
         )}
       </div>
+
     </>
   );
 }
