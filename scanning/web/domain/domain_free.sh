@@ -161,7 +161,7 @@ check_domain_status() {
 			line_1=$(cat live.txt | wc -l)
 			echo -e "Output: Found $line_1 live subdomains for $url"
 		else
-			echo "[-] please install httpx"
+			echo "Error: httpx Connection Error"
 		fi
 		
 		rm subs.txt live.txt
