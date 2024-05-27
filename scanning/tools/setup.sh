@@ -1,23 +1,13 @@
 #!/bin/bash
 
-#colors 
-END="\e[1m"
-Red="\e[31m"
-GREEN="\e[32m"
-BOLDGREEN="\e[1;${GREEN}"
-YELLOW="\033[0;33m"
-Cyan="\e[0;36m"
-white="\e[0;37m"
-
 #check you are root or not
 if [ $EUID -ne 0 ]
-	then echo -e "${Red}Please run as a root${END}"
+	then echo -e "Please run as a root"
 	exit
 fi
 #banner for Script to look cool
 
 echo -e "
-${Red}
   ####   ######   #####  #    #  #####
  #       #          #    #    #  #    #
   ####   #####      #    #    #  #    #
@@ -30,7 +20,10 @@ requirements(){
 	#Updating System
 	echo "Updating System"
 	sudo apt update &> /dev/null
-	
+
+ 	echo "Installing Netwotk Tools:
+	sudo apt install iputils-ping
+
 	# check go 
 	go_v=$(go version) 2> /dev/null
 	if ! command -v go &> /dev/null
@@ -46,7 +39,7 @@ requirements(){
 		export PATH=$PATH:$GOPATH/bin
 		source /etc/profile #to update you shell don't worry
 	else
-		echo -e "${Cyan}Go is already installed and your version is: ${go_v:13}${END}"
+		echo -e "Go is already installed and your version is: ${go_v:13}"
 	fi
 	if ! command -v go &> /dev/null
 	then
@@ -69,7 +62,7 @@ requirements(){
 		apt install python3 -y &> /dev/null
 		apt install python3-pip -y &> /dev/null
 	else
-		echo -e "${BOLDGREEN}All requirements are already installed.${END}"
+		echo -e "All requirements are already installed."
 	fi
 }
 
@@ -224,15 +217,6 @@ tools(){
 	else
 		echo "dnsrecon is already installed"
 	fi
-	
-	
-	
-	
-
-
-	
-	
-	
 	
 }
 
