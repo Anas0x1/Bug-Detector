@@ -18,8 +18,6 @@ function Networkscan() {
   const result = useSelector((state) => state.networkScan.result);
   const token = useSelector(state => state.auth.token);
 
-  console.log("result")
-  console.log(result)
   const options = {
     // default is Resolution.MEDIUM = 3, which should be enough, higher values
     // increases the image quality but also the size of the PDF, so be careful
@@ -76,7 +74,7 @@ function Networkscan() {
       <div className="input-group mb-3 group">
         <input
           type="text"
-          placeholder="Enter Domin , IP"
+          placeholder="Enter IP, CIDR"
           id="input"
           className="input-url"
           value={url} onChange={(e) => setUrl(e.target.value)}
@@ -231,50 +229,31 @@ function Networkscan() {
         </div>
       )}
       {status === "succeeded" && (
-        <div className="mx-auto mt-3" style={{ width: "80%" }}>
+        <div className="mx-auto mt-3" style={{ width: "90%" }}>
           <div className="table-responsive-sm" >
 
-            <table className="table table-sm table-striped" >
-              {result ? <tbody >
+            <table className="table table-striped table-hover" >
+            <thead>
                 <tr>
-                  <th scope="row" style={{ color: "red" }} >
-                    Title
-                  </th>
-                  <td >{result.title.replaceAll("<br>", "")}</td>
+                  <th scope="col" style={{ color: "red" }} >Title</th>
+                  <th scope="col" style={{ color: "red" }} >Description</th>
+                  <th scope="col" style={{ color: "red" }} >Output</th>
                 </tr>
-                <tr>
-                  <th scope="row" style={{ color: "red" }}>
-                    Description
-                  </th>
-                  <td>{result.details.replaceAll("<br>", "")}</td>
-                </tr>
-                <tr>
-                  <th scope="row" style={{ color: "red" }}>
-                    Output
-                  </th>
-                  <td>{result.output.replaceAll("<br>", "")}</td>
-                </tr>
-              </tbody> : <tbody>
-                <tr>
-                  <th scope="row" style={{ color: "red" }} >
-                    Title
-                  </th>
-                  <td ></td>
-                </tr>
-                <tr>
-                  <th scope="row" style={{ color: "red" }}>
-                    Description
-                  </th>
+              </thead>
+              <tbody >
+                {result.result ? result.result.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.title && item.title.replaceAll("<br>", "")}</td>
+                    <td>{item.details && item.details.replaceAll("<br>", "\n")}</td>
+                    <td>{item.output && item.output.replaceAll("<br>", "")}</td>
+                  </tr>
+                )) : <tr>
                   <td></td>
-                </tr>
-                <tr>
-                  <th scope="row" style={{ color: "red" }}>
-                    Output
-                  </th>
                   <td></td>
-                </tr>
+                  <td></td>
+                </tr>}
 
-              </tbody>}
+              </tbody>
 
             </table>
           </div>

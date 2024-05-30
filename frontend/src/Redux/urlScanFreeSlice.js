@@ -7,7 +7,7 @@ export const scanUrl = createAsyncThunk(
     try {
       // const response = await axiosInstance.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Scan/FreeWebScan', {
       // const response = await axiosInstance.post('https://localhost:7268/api/Scan/FreeWebScan', {
-      const response = await axiosInstance.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Scan/FreeWebScan', {
+      const response = await axiosInstance.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Scan/FreeWebScan', {
         url
       }, {
         headers: {
@@ -41,7 +41,7 @@ const urlScanSlice = createSlice({
       })
       .addCase(scanUrl.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.result = action.payload.result[0];
+        state.result = action.payload;
       })
       .addCase(scanUrl.rejected, (state, action) => {
         state.status = 'failed';

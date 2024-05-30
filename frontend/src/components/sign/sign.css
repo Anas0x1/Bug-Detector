@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center; /* centraliza no eixo x */
     align-items: center;
+    margin-top: 10%;
 }
 
 .left-login1 {

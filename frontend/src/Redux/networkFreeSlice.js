@@ -5,8 +5,8 @@ export const scanNetwork = createAsyncThunk(
   'networkScan/scan',
   async (url) => {
     try {
-      const response = await axiosInstance.post("https://localhost:7268/api/Scan/FreeNetworkScan", {
-      // const response = await axiosInstance.post("https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Scan/FreeNetworkScan", {
+      // const response = await axiosInstance.post("https://localhost:7268/api/Scan/FreeNetworkScan", {
+      const response = await axiosInstance.post("https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Scan/FreeNetworkScan", {
         url
       }, {
         headers: {
@@ -39,7 +39,7 @@ const networkScanSlice = createSlice({
       })
       .addCase(scanNetwork.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.result = action.payload.result[0];
+        state.result = action.payload;
       })
       .addCase(scanNetwork.rejected, (state, action) => {
         state.status = 'failed';

@@ -21,7 +21,7 @@ function Nav() {
     <div className="container">
       <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary justify-content-between" data-bs-theme="dark">
         <div className="container">
-          <Link className="navbar-brand text-white" to="/">BugDetector</Link>
+          <Link className="navbar-brand text-white" to="/">Bug Detector</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>

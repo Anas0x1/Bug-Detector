@@ -9,8 +9,10 @@ function Home() {
     <div>
       <div className="container">
         <div className="row" style={{ textAlign: "center", marginTop: "100px", marginBottom: "100px" }}>
-          <h1 className="slide-in-left" style={{ color: "aliceblue", marginLeft: "25px" }}>BugDetector</h1>
-          <p className="slide-in-left-delayed-1" style={{ color: "aliceblue", fontSize: "xx-large" }}>A Comprehensive GUI Security Scanner</p>
+          <h1 className="slide-in-left" style={{ color: "aliceblue", marginLeft: "25px" }}>Bug Detector</h1>
+          <p className="slide-in-left-delayed-1" style={{ color: "aliceblue", fontSize: "20px" }}>
+          A Comprehensive Vulnerability Scanner. This tool is meticulously designed to tackle security challenges across web applications, networks, and source code. As organizations increasingly depend on digital platforms, safeguarding against potential threats is crucial. Our scanner ensures robust protection by identifying and addressing vulnerabilities, helping to secure the digital infrastructure of businesses.
+          </p>
         </div>
       </div>
 

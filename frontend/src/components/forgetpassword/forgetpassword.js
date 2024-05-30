@@ -104,7 +104,7 @@ function ForgetPassword() {
 
     return (
         <>
-            <div className="main-login1" style={{marginTop:"20px"}} >
+            <div className="main-login1" style={{marginTop:"10%"}} >
                 <div className="right-login1">
                     <div className="card-login1">
                         <h1>Reset Password</h1>

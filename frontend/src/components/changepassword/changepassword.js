@@ -49,7 +49,6 @@ function ChangePassword() {
 
         dispatch(changepassword(formData))
             .then((response) => {
-                console.log(formData);
                 if (!response.error) {
                     MySwal.fire({
                         icon: 'success',

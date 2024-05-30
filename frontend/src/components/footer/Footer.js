@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="text-center mt-5" >
+    <footer className="text-center" style={{marginTop:"8%"}} >
       <div className="container p-4">
         <section className="mb-4">
           <a data-mdb-ripple-init className="btn btn-outline btn-floating m-1" href="#!" role="button">

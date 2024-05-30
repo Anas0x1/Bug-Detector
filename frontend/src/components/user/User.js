@@ -72,7 +72,8 @@ function User() {
                     </div>
                   </td>
                   <td>
-                    {report.result.toLowerCase().includes('error') ?
+                    {report.result &&
+                      report.result.toLowerCase().includes('error') ?
                       <i className="fa-solid fa-x" style={{ color: "white", backgroundColor: "#f50a0a", width: "30px", height: "30px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%" }}></i>
                       : <i className="fa-solid fa-check" style={{ color: "white", backgroundColor: "#76fe06", width: "30px", height: "30px", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%" }}></i>
                     }
@@ -102,7 +103,7 @@ function User() {
             )}
           </tbody>
         </table>
-        <div className='d-flex justify-content-center'>
+        {pageCount > 0 && <div className='d-flex justify-content-center'>
           <ReactPaginate
             pageCount={Math.ceil(reports.length / dataPerPage)}
             pageRangeDisplayed={1}
@@ -115,7 +116,8 @@ function User() {
             pageClassName={'pagination-page'}
             breakClassName={'pagination-break'}
           />
-        </div>
+        </div>}
+
 
       </div>
 
