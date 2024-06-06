@@ -320,7 +320,7 @@ js_files() {
 	echo "######################################################################"
 	echo "Crawling JS files"
 	echo "######################################################################"
-	katana -u $domain | grep -iE '\.js' | grep -iEv '(\.jsp|\.json)'
+	katana -silent -u $domain | grep -iE '\.js' | grep -iEv '(\.jsp|\.json)'
 	echo "######################################################################"
 	echo "JavaScript files contain code that enables dynamic, interactive behavior on websites by manipulating the HTML and CSS, responding to user actions, and communicating with servers."
 }
