@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axios.post("https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Account/Login", credentials, {
+      const response = await axios.post("http://localhost:5220/api/Account/Login", credentials, {
       // const response = await axios.post("https://localhost:7268/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axios.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Account/Register', userData, {
+      const response = await axios.post('http://localhost:5220/api/Account/Register', userData, {
       // const response = await axios.post('https://localhost:7268/api/Account/Register', userData, {
         headers: {
           'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export const changepassword = createAsyncThunk(
     try {
       // const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Register', userData, {
       // const response = await axiosInstance.post('https://localhost:7268/api/Account/ChangePassword', userData, {
-      const response = await axiosInstance.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Account/ChangePassword', userData, {
+      const response = await axiosInstance.post('http://localhost:5220/api/Account/ChangePassword', userData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -68,7 +68,7 @@ export const forgetpassword = createAsyncThunk(
     try {
       // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/Register', userData, {
       // const response = await axios.post('https://localhost:7268/api/Account/ForgotPassword', userData, {
-      const response = await axios.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Account/ForgotPassword', userData, {
+      const response = await axios.post('http://localhost:5220/api/Account/ForgotPassword', userData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -87,7 +87,7 @@ export const generateOTP = createAsyncThunk(
     try {
       // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
       // const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTP', { email }, {
-      const response = await axios.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+      const response = await axios.post('http://localhost:5220/api/Account/GenerateAnOTP', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -107,7 +107,7 @@ export const generateOTPforForgetPassword = createAsyncThunk(
     try {
       // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
       // const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTPForForgotPassword', { email }, {
-      const response = await axios.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Account/GenerateAnOTPForForgotPassword', { email }, {
+      const response = await axios.post('http://localhost:5220/api/Account/GenerateAnOTPForForgotPassword', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }

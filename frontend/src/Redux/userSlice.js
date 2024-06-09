@@ -8,7 +8,7 @@ export const fetchAllReports = createAsyncThunk(
         try {
             // const response = await axios.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Account/Register', userData, {
             // const response = await axiosInstance.post('https://localhost:7268/api/Scan/ReturnReportsForUser', {
-            const response = await axiosInstance.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Scan/ReturnReportsForUser', {
+            const response = await axiosInstance.post('http://localhost:5220/api/Scan/ReturnReportsForUser', {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -26,7 +26,7 @@ export const getReport = createAsyncThunk(
         try {
             // const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Blogs/ReturnOneBlog', blogid);
             // const response = await axiosInstance.post('https://localhost:7268/api/Scan/ReturnOneReport', reportid, {
-            const response = await axiosInstance.post('https://obscure-fortnight-pj7766q7rv9636xx9-5220.app.github.dev/api/Scan/ReturnOneReport', reportid, {
+            const response = await axiosInstance.post('http://localhost:5220/api/Scan/ReturnOneReport', reportid, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

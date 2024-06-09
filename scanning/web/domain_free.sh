@@ -17,7 +17,7 @@ validate_domain() {
 		# Check if the domain is live or down
 		check_domain_status "$domain"
 	else
-		echo -e "Invalid domain/subdomain format: $domain"
+		echo -e "Error: Invalid domain/subdomain format: $domain"
 		exit 1
 	fi
 }
@@ -32,7 +32,7 @@ check_domain_status() {
 	if ping -c 1 "$domain" &>/dev/null; then
 		echo -e "Domain is live: $domain"
 	else
-		echo -e "Domain is down: $domain"
+		echo -e "Error: Domain is down: $domain"
 		exit 1
 	fi
 }
@@ -45,11 +45,11 @@ target_whois() {
 	echo "######################################################################"
 	if command -v whois &> /dev/null; then
 		whois "$domain"
-		echo "######################################################################"
-		echo "Gathering information using whois command is to identifying registry like creation date, admin country, name servers, etc."
 	else
 		echo "Error: whois command not found"
 	fi	
+	echo "######################################################################"
+	echo "Gathering information using whois command is to identifying registry like creation date, admin country, name servers, etc."
 }
 
 web_tech() {
@@ -60,72 +60,71 @@ web_tech() {
 	echo "######################################################################"
 	if command -v whatweb &> /dev/null; then
 		whatweb "$domain" | tr ',' '\n'
-		echo "######################################################################"
-		echo "Collecting web technologies and operating system which website based on"
 	else
 		echo "Error: whatweb command not found"
 	fi
+	echo "######################################################################"
+	echo "Collecting web technologies and operating system which website based on"
 }
 
 A_Record() {
 	local domain=$1
 
 	echo "######################################################################"
-	echo "Title: DNS Enumeration (A Record)"
+	echo "DNS Enumeration (A Record)"
 	echo "######################################################################"
 	if command -v host &> /dev/null; then
 		host -t A $domain | cut -d ' ' -f 4
-		echo "######################################################################"
-		echo "Enumerating domain/subdomain dns is a sensitive process that identify A records that fetch the original IPv4 from domain"
 	else
 		echo "Error: Connection timeout"
 	fi
+	echo "######################################################################"
+	echo "Enumerating domain/subdomain dns is a sensitive process that identify A records that fetch the original IPv4 from domain"
 }
 
 NS_Record() {
 	local domain=$1
 
 	echo "######################################################################"
-	echo "Title: DNS Enumeration (NS Record)"
+	echo "DNS Enumeration (NS Record)"
 	echo "######################################################################"
 	if command -v host &> /dev/null; then
 		host -t NS $domain | cut -d ' ' -f 4
-		echo "######################################################################"
-		echo "Enumerating domain/subdomain dns is a sensitive process that identify NS records that fetch all name servers"
 	else
 		echo "Error: Connection timeout"
 	fi
+	echo "######################################################################"
+	echo "Enumerating domain/subdomain dns is a sensitive process that identify NS records that fetch all name servers"
 }
 
 MX_Record() {
 	local domain=$1
 
 	echo "######################################################################"
-	echo "Title: DNS Enumeration (MX Record)"
+	echo "DNS Enumeration (MX Record)"
 	echo "######################################################################"
 	if command -v host &> /dev/null; then
 		host -t MX $domain | cut -d ' ' -f 4
-		echo "######################################################################"
-		echo "Enumerating domain/subdomain dns is a sensitive process that identify NS records that fetch mail servers names"
 	else
 		echo "Error: Connection timeout"
 	fi
+	echo "######################################################################"
+	echo "Enumerating domain/subdomain dns is a sensitive process that identify NS records that fetch mail servers names"
 }
 
 ssl_cert() {
 	local domain=$1
 
 	echo "######################################################################"
-	echo "Title: Checking SSL Certificate"
+	echo "Checking SSL Certificate"
 	echo "######################################################################"
 	if command -v sslyze &> /dev/null; then
-		echo "Output: "
 		sslyze "$domain"
-		echo "######################################################################"
-		echo "Checking domain/subdomain SSL certificate that related to if the domain/subdomain has a secure or unsecure traffic"
 	else
 		echo "Error: sslyze command not found"
 	fi
+	echo "######################################################################"
+	echo "Checking domain/subdomain SSL certificate that related to if the domain/subdomain has a secure or unsecure traffic"
 }
 
 check_protocol() {
@@ -153,11 +152,11 @@ waf() {
 	echo "######################################################################"
 	if command -v wafw00f &> /dev/null; then
 		wafw00f http://"$domain" | grep -A 4 -E "Checking"
-		echo "######################################################################"
-		echo "Checking web application firewall is a sensitive process that detecting if domain/subdomain uses a WAF or not"
 	else
 		echo "Error: wafw00f command not found"
 	fi
+	echo "######################################################################"
+	echo "Checking web application firewall is a sensitive process that detecting if domain/subdomain uses a WAF or not"
 }
 
 res_headers() {
@@ -320,11 +319,22 @@ js_files() {
 	echo "######################################################################"
 	echo "Crawling JS files"
 	echo "######################################################################"
-	katana -silent -u $domain | grep -iE '\.js' | grep -iEv '(\.jsp|\.json)'
+	katana -u $domain | grep -iE '\.js' | grep -iEv '(\.jsp|\.json)'
 	echo "######################################################################"
 	echo "JavaScript files contain code that enables dynamic, interactive behavior on websites by manipulating the HTML and CSS, responding to user actions, and communicating with servers."
 }
 
+emails() {
+	local domain=$1
+
+	echo "######################################################################"
+	echo "Finding Emails"
+	echo "######################################################################"
+	emailfinder -d "$domain" 
+	echo "######################################################################"
+	echo "EmailFinder can locate email addresses associated with a domain or individual."
+
+}
 
 # Main function to process the input
 process_input() {
@@ -349,6 +359,7 @@ process_input() {
 		fuzzing "$input"
 		json_files "$input"
 		js_files "$input"
+		emails "$input"
 		exit 0
 	else
 		echo "Error: Domain is down or invalid format."
