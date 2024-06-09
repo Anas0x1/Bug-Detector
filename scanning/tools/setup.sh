@@ -199,6 +199,78 @@ tools() {
     else
         echo "sslyze is already installed"
     fi
+
+    # Check if emailfinder is installed
+    if ! command -v emailfinder &> /dev/null; then
+        echo "Installing emailfinder now"
+        pip3 install emailfinder &> /dev/null
+        echo "emailfinder installation is done"
+    else
+        echo "emailfinder is already installed"
+    fi
+
+    # Check if paramspider is installed
+    if ! command -v paramspider &> /dev/null; then
+        echo "Installing paramspider now"
+        git clone https://github.com/devanshbatham/paramspider
+        cd paramspider
+        pip install .
+        echo "paramspider installation is done"
+    else
+        echo "paramspider is already installed"
+    fi
+
+    # Check if waybackurls is installed
+    if ! command -v waybackurls &> /dev/null; then
+        echo "Installing paramspider now"
+        go install github.com/tomnomnom/waybackurls@latest &> /dev/null
+        echo "waybackurls installation is done"
+    else
+        echo "waybackurls is already installed"
+    fi
+
+    # Check if gf is installed
+    if ! command -v gf &> /dev/null; then
+        echo "Installing paramspider now"
+        go install github.com/tomnomnom/gf@latest &> /dev/null
+        echo "gf installation is done"
+    else
+        echo "gf is already installed"
+    fi
+
+    # Check if gf-pattern is installed
+    if ! command -v  gf-pattern &> /dev/null; then
+        echo "Installing gf-pattern now"
+        mkdir ~/.gf
+        cp -r $GOPATH/src/github.com/tomnomnom/gf/examples ~/.gf
+        git clone https://github.com/1ndianl33t/Gf-Patterns
+        mv Gf-Patterns/*.json ~/.gf
+        go install github.com/tomnomnom/gf@latest &> /dev/null
+        echo "gf-pattern installation is done"
+    else
+        echo "gf-pattern is already installed"
+    fi
+
+    # Check if kxss is installed
+    if ! command -v kxss &> /dev/null; then
+        echo "Installing kxss now"
+        go install github.com/Emoe/kxss@latest &> /dev/null
+        echo "kxss installation is done"
+    else
+        echo "kxss is already installed"
+    fi
+
+    # Check if oralyzer is installed
+    if ! command -v oralyzer &> /dev/null; then
+        echo "Installing oralyzer now"
+        git clone https://github.com/r0075h3ll/Oralyzer.git
+        cd Oralyzer
+        pip3 install -r requirements.txt
+        echo "oralyzer installation is done"
+    else
+        echo "oralyzer is already installed"
+    fi
+
 }
 
 requirements
