@@ -109,7 +109,7 @@ redirect_scan() {
 	echo "Scanning Open Redirect"
 	echo "######################################################################"
 	cat wayback.txt | gf redirect | tee redirect.txt
-    python3 ~/tools/Oralyzer/oralyzer -l results/$1.txt redirect.txt
+    python3 ../tools/Oralyzer/oralyzer.py -l results/$1.txt redirect.txt
 	echo "######################################################################"
 	echo "An open redirect vulnerability occurs when an application accepts untrusted input to craft URLs that cause a redirect to an external site, potentially leading to phishing or malware distribution."
 	echo "######################################################################"
