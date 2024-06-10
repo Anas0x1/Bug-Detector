@@ -18,7 +18,7 @@ import store from './Redux/store';
 import ForgetPassword from "./components/forgetpassword/forgetpassword";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import ReportPage from "./pages/ReportPage";
-
+import PricingPage from "./pages/PricingPage";
 function App() {
   return (
     <div>
@@ -29,7 +29,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/sign" element={<Sign />} />
             <Route path="/scanner" element={<Scan />} />
-            {/* <Route path="/pricing" element={<PricingPage />} /> */}
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/forgetpassword" element={<ForgetPassword />} />
             <Route path="/changepassword" element={<ChangePasswordPage />} />

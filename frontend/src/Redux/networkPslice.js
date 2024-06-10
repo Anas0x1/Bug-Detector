@@ -8,7 +8,7 @@ export const scanPremiumNetwork = createAsyncThunk(
     try {
       // const response = await axiosInstance.post("https://localhost:7268/api/Scan/PremiumNetworkScan", {
       // const response = await axiosInstance.post("https://localhost:5220/api/Scan/PremiumNetworkScan", {
-      const response = await axiosInstance.post("https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Scan/PremiumNetworkScan", {
+      const response = await axiosInstance.post("https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Scan/PremiumNetworkScan", {
         url
       }, {
         headers: {

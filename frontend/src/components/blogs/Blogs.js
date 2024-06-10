@@ -6,21 +6,17 @@ import BlogCard from '../cardBlog/BlogCard';
 import "./blogs.css"
 
 const Blogs = () => {
-
     const dispatch = useDispatch();
-
     const userName = useSelector(state => state.auth.user);
-
     const blogs = useSelector((state) => selectAllBlogs(state));
     const token = useSelector((state) => state.auth.token);
     let Like = <i className="fa-regular fa-thumbs-up"></i>;
     let disLike = <i className="fa-regular fa-thumbs-down"></i>;
-
     const [search, setSearch] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [filteredBlogs, setFilteredBlogs] = useState(blogs);
-
+   
     useEffect(() => {
         dispatch(fetchAllBlogs());
         if (search !== '') {
@@ -155,12 +151,12 @@ const Blogs = () => {
                     filteredBlogs.length > 0 ? (
                         filteredBlogs.map((blog, index) => (
                             <div className='mt-3 me-4' key={index}>
-                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} />
+                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id}/>
                                 <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
                                 <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
                                 <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
                                 <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
-                                {userName == blog.usrName &&
+                                {userName === blog.usrName &&
                                     <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
                                         <i className="fa-solid fa-trash mx-2"></i>
                                     </span>
@@ -173,12 +169,12 @@ const Blogs = () => {
                     blogs.length > 0 ? (
                         blogs.map((blog, index) => (
                             <div className='mt-3 me-4' key={index}>
-                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} />
+                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} Name={userName} />
                                 <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
                                 <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
                                 <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
                                 <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
-                                {userName == blog.usrName &&
+                                {userName === blog.usrName &&
                                     <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
                                         <i className="fa-solid fa-trash mx-2"></i>
                                     </span>
@@ -192,27 +188,6 @@ const Blogs = () => {
                     )
                 )}
             </div>
-
-            {/* <div className='container d-flex flex-wrap justify-content-evenly'>
-                {blogs.length > 0 ? (
-                    blogs.map((blog, index) => (
-                        <div className='mt-3' key={index}>
-                            <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} />
-                            <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
-                            <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
-                            <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
-                            <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
-                            <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
-                                <i className="fa-solid fa-trash mx-2"></i>
-                            </span>
-                        </div>
-                    ))
-                ) : (
-                    <div className="spinner-border text-light" role="status" style={{ marginBottom: "1000px", justifyContent: "center" }}>
-                        <span className="sr-only" style={{ color: "white" }}>Loading...</span>
-                    </div>
-                )}
-            </div> */}
         </>
     );
 };

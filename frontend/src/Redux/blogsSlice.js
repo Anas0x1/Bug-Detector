@@ -78,7 +78,7 @@ export const fetchAllBlogs = createAsyncThunk(
     try {
       // const response = await axiosInstance.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
       // const response = await axiosInstance.post('https://localhost:7268/api/Blogs/ReturnAllBlogs');
-      const response = await axiosInstance.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
+      const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Blogs/ReturnAllBlogs');
       return response.data;
     } catch (error) {
       throw error;

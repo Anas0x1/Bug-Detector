@@ -18,12 +18,7 @@ function Pricing() {
                             <div className="single-pricing">
                                 <div className="price-head">
                                     <h2>Free</h2>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                                   
                                 </div>
                                 <h1 className="price">$0.00</h1>
                                 <h5>Monthly</h5>
@@ -41,12 +36,7 @@ function Pricing() {
                             <div className="single-pricing single-pricing-white">
                                 <div className="price-head">
                                     <h2>Premium</h2>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                                    
                                 </div>
                                 <span className="price-label">Best</span>
                                 <h1 className="price">$20.00</h1>

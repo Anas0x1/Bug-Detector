@@ -178,9 +178,7 @@ function Webscan() {
               Schedule <i className="fa-regular fa-clock"></i>
             </button>
           </div>}
-          {(status === "succeeded" && result) &&
-            <button className="ms-3 btn btn-success rounded" onClick={() => generatePDF(getTargetElement, options)}><i className="fa-solid fa-download fa-beat me-1"></i> Download</button>
-          }
+         
         </div>
       </div>
 
@@ -331,56 +329,11 @@ function Webscan() {
                 </tr>}
               </tbody>
             </table>
+            <div> {(status === "succeeded" && result) &&
+            <button className="btn btn-success rounded" onClick={() => generatePDF(getTargetElement, options)}><i className="fa-solid fa-download fa-beat me-1"></i> Download</button>
+          }</div>
           </div>
-          // <div className="mx-auto mt-3" style={{ width: "80%" }}>
-          //   <div className="table-responsive-sm ">
-          //     <table className="table table-sm table-striped" >
-          //       {result ?
-          //         <tbody>
-          //           <tr>
-          //             <th scope="row" style={{ color: "red" }} >
-          //               Title
-          //             </th>
-          //             <td >{result.title&&result.title.replaceAll("<br>", "")}</td>
-          //           </tr>
-          //           <tr>
-          //             <th scope="row" style={{ color: "red" }}>
-          //               Description
-          //             </th>
-          //             <td>{result.details&&result.details.replaceAll("<br>", "\n")}</td>
-          //           </tr>
-          //           <tr>
-          //             <th scope="row" style={{ color: "red" }}>
-          //               Output
-          //             </th>
-          //             <td>{result.output&&result.output.replaceAll("<br>", "")}</td>
-          //           </tr>
-
-          //         </tbody> : <tbody>
-          //           <tr>
-          //             <th scope="row" style={{ color: "red" }} >
-          //               Title
-          //             </th>
-          //             <td ></td>
-          //           </tr>
-          //           <tr>
-          //             <th scope="row" style={{ color: "red" }}>
-          //               Description
-          //             </th>
-          //             <td></td>
-          //           </tr>
-          //           <tr>
-          //             <th scope="row" style={{ color: "red" }}>
-          //               Output
-          //             </th>
-          //             <td></td>
-          //           </tr>
-
-          //         </tbody>}
-          //     </table>
-          //   </div>
-          // </div>
-
+      
         )}
 
         {status === "failed" && (
