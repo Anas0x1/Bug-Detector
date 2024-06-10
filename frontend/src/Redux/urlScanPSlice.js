@@ -12,7 +12,7 @@ export const scanPrUrl = createAsyncThunk(
     }
 
     try {
-      const response = await fetch('https://localhost:5220/api/Scan/PremiumWebScan', {
+      const response = await fetch('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Scan/PremiumWebScan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

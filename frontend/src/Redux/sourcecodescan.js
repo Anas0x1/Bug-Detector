@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { axiosInstance } from './axios-instance';
-export const scanUrl = createAsyncThunk(
-  'urlScan/scanUrl',
+export const sourcecodeURL = createAsyncThunk(
+  'sourcecodeURL/sourcecodeURL',
   async (url) => {
     try {
-      // const response = await axiosInstance.post('https://humble-meme-979499pgp76q3pq76-5220.app.github.dev/api/Scan/FreeWebScan', {
-      // const response = await axiosInstance.post('https://localhost:7268/api/Scan/FreeWebScan', {
-      const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Scan/FreeWebScan', {
+   
+      const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/SourceCodeScan/SourceCodeScan', {
         url
       }, {
         headers: {
@@ -29,25 +28,25 @@ const initialState = {
   error: null
 };
 
-const urlScanSlice = createSlice({
-  name: 'urlScan',
+const SourcecodeURL = createSlice({
+  name: 'sourcecodeURL',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(scanUrl.pending, (state) => {
+      .addCase(sourcecodeURL.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(scanUrl.fulfilled, (state, action) => {
+      .addCase(sourcecodeURL.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.result = action.payload;
       })
-      .addCase(scanUrl.rejected, (state, action) => {
+      .addCase(sourcecodeURL.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   }
 });
 
-export default urlScanSlice.reducer;
+export default SourcecodeURL.reducer;

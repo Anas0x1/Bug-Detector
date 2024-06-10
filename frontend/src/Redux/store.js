@@ -8,7 +8,7 @@ import networkScanReducer from "./networkFreeSlice";
 import networkPSliceReducer from './networkPslice';
 import messageSliceReducer from './messageSlice';
 import userSliceReducer from './userSlice';
-
+import SourcecodeURLReducer from './sourcecodescan';
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -20,6 +20,7 @@ const store = configureStore({
     networkPScan: networkPSliceReducer,
     message:messageSliceReducer,
     user:userSliceReducer,
+    sourcecodeURL:SourcecodeURLReducer,
   }
 });
 

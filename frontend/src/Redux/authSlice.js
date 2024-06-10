@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axios.post("http://localhost:5220/api/Account/Login", credentials, {
+      const response = await axios.post("https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Account/Login", credentials, {
       // const response = await axios.post("https://localhost:7268/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axios.post('http://localhost:5220/api/Account/Register', userData, {
+      const response = await axios.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Account/Register', userData, {
       // const response = await axios.post('https://localhost:7268/api/Account/Register', userData, {
         headers: {
           'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ export const generateOTP = createAsyncThunk(
     try {
       // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
       // const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTP', { email }, {
-      const response = await axios.post('http://localhost:5220/api/Account/GenerateAnOTP', { email }, {
+      const response = await axios.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
