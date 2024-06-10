@@ -12,7 +12,7 @@ fi
 
 # Check required commands
 
-for cmd in nmap dig whois traceroute masscan grep awk cut paste; do
+for cmd in nmap ping dig whois traceroute grep awk cut paste; do
     check_command "$cmd"
 done
 
@@ -22,12 +22,11 @@ live_ip(){
 
     local ip=$1
 
-    output=$(nmap -sn -PU -PE -T4 -n "$ip")
-    if echo "$output" | grep -q "Host is up"; then
-        echo "Output: The IP $ip is live"
+    # Check if IP is live
+    if ping -c 3 -W 1 "$ip" &> /dev/null; then
+        return 0
     else
-        echo "Error: The IP $ip is not live"
-        exit 1
+        return 1
     fi
 }
 
@@ -35,28 +34,32 @@ reverse_dns_lookup(){
 
     local ip=$1
 
-    echo "######################################################################"
     echo "Title: Reverse DNS Lookup IP: $ip"
     echo "######################################################################"
 
-    echo "Output: "
     domain=$(dig -x "$ip" +short)
-    if [ -z "$domain" ]; then
-    	domain="N/A"
-    fi
-    
-    echo "Domain: $domain"
-    if [ "$domain" != "N/A" ]; then
-        data=$(dig "$domain" ANY +noall +answer)
-        if [ -n "$data" ]; then
-    	    echo "Additional DNS records: "
-    	    echo "$data"
-    	fi
+    if [ $? -eq 0 ]; then
+        if [ -z "$domain" ]; then
+    	    domain="N/A"
+        fi
+        echo "Output: "
+        echo "Domain: $domain"
+        
+        if [ "$domain" != "N/A" ]; then
+            data=$(dig "$domain" ANY +noall +answer)
+            if [ -n "$data" ]; then
+    	        echo "Additional DNS records: "
+    	        echo "$data"
+    	    fi
+        fi
+    else
+        echo "Error : Error during performing reverse dns lookup"
     fi
     echo "######################################################################"
     echo "Description: The dig command is used to perform reverse DNS lookup on IPs and retrieve other related records"
     echo "######################################################################"
-
+    echo "Mitigation: It is just information gathering, NO mitigation for it"
+    echo "######################################################################"
 }
 
 asn_lookup(){
@@ -75,7 +78,8 @@ asn_lookup(){
     echo "######################################################################"
     echo "Description: The whois command is used to retrieve ASN information from the Cymru WHOIS database."
     echo "######################################################################"
-
+    echo "Mitigation: It is just information gathering, NO mitigation for it"
+    echo "######################################################################"
 }
 
 whois_lookup(){
@@ -103,6 +107,8 @@ whois_lookup(){
     echo "######################################################################"
     echo "Description: The whois command is used to retrieve information about domain names, IP addresses, and related entities from the WHOIS database."
     echo "######################################################################"
+    echo "Mitigation: It is just information gathering, NO mitigation for it"
+    echo "######################################################################"
 }
 
 traceroute_scan(){
@@ -113,7 +119,7 @@ traceroute_scan(){
     echo "######################################################################"
 
     echo "Output: "
-    traceroute_result=$(traceroute "$ip" 2>&1 | awk '{print $1, $2, $3}' | column -t )
+    traceroute_result=$(traceroute "$ip" 2>&1 | awk '!/\*/{print $1, $2, $3}' | column -t )
     if [[ $? -eq 0 ]]; then
         echo "$traceroute_result"
     else
@@ -121,6 +127,8 @@ traceroute_scan(){
     fi
     echo "######################################################################"
     echo "Description: The traceroute command is used to trace the path packets take to reach the target IP address."
+    echo "######################################################################"
+    echo "Mitigation: It is just information gathering, NO mitigation for it"
     echo "######################################################################"
 }
 
@@ -131,64 +139,28 @@ port_scanning(){
     echo "Title: Port Scanning IP: $ip"
     echo "######################################################################"
 
-    output=$(masscan -p1-65535 --open-only --max-rate 900 "$ip" 2>/dev/null | awk '/open/{print $4}' | cut -d "/" -f1 | paste -sd, -)
+    
+    local ip=$1
+
+    echo "Title: Port Scanning IP: $ip"
+    echo "######################################################################"
+
+    output=$(nmap -Pn -n -T4 --open -p1-65535 -sV "$ip" 2>/dev/null | grep -P '^\d+/tcp' | awk '{print $1}')
     if [[ $? -ne 0 ]]; then
         echo "Error: Error during port scanning"
     else
+        echo "Output: "
         if [ -n "$output" ]; then
-            echo "Output: "
-            echo "Open Ports: $output"
-        
-            echo "######################################################################"
-            echo "Description: The masscan tool is used for fast port scanning to identify open ports on the target IP address."
-            echo "######################################################################"
-            echo "Title: Service Detection IP: $ip"
-            echo "######################################################################"
-            services=$(nmap -sS -Pn -n -sV -T4 -p "$output" $ip )
- 	    if [[ $? -ne 0 ]]; then
-            	echo "Error: Error during service detection"
-            else
-                echo "Output: "
-                if [ -n "$services" ]; then
-	    	    echo "$services" | grep "open"
-	        else
-	            echo "No services found"
-	        fi
-	    fi
-	    echo "######################################################################"
-	    echo "Description: The nmap tool is used to identify services running on open ports on the target IP address."
-            echo "######################################################################"
+            echo "$output"
         else
             echo "No open ports found in $ip"
         fi
+        echo "######################################################################"
+        echo "Description: The nmap tool is used for port scanning to identify open ports on the target IP address."
+	echo "######################################################################"
+	echo "Mitigation: It is just information gathering, NO mitigation for it"
+        echo "######################################################################"
     fi
-}
-
-os_detection(){
-
-    local ip=$1
-
-    echo "Title: OS Detection IP: $ip"
-    echo "######################################################################"
-
-    echo "Output: "
-    nmap_result=$(nmap -Pn -n -O --osscan-limit --osscan-guess --fuzzy --mtu 24 "$ip" 2>&1)
-    if [[ $? -eq 0 ]]; then
-        os_info=$(echo "$nmap_result" | grep -i "OS details" | awk -F': ' '{print $2}')
-        os_guess=$(echo "$nmap_result" | grep -i "Aggressive OS guesses" | awk -F': ' '{print $2}')
-        if [[ -n $os_info ]]; then
-            echo "OS Details: $os_info"
-        elif [[ -n $os_guess ]]; then
-            echo "OS Guess: $os_guess"
-        else
-            echo "OS detection failed."
-        fi
-    else
-        echo "Error: An error occurred while performing OS detection."
-    fi
-    echo "######################################################################"
-    echo "Description: Perform OS detection using the Nmap command."
-    echo "######################################################################"
 }
 
 perform_scan(){
@@ -200,7 +172,6 @@ perform_scan(){
     whois_lookup "$ip"
     traceroute_scan "$ip"
     port_scanning "$ip"
-    os_detection "$ip"
     bash cve.sh "$ip"
 
 }
@@ -221,17 +192,11 @@ validate_ip() {
         echo "Error: Invalid Input: $input"
         exit 1
     fi
-
-    echo "Output: The IP $input is valid"
+    echo "Output: "
+    echo "The IP $input is valid"
 }
 
 #==================================== Main ==========================================
-
-# Run with sudo
-if [ $(id -u) -ne 0 ]; then
-    echo "This script requires root privileges. Please run it with sudo"
-    exit 1
-fi
 
 # Check if IP is provided as argument
 if [ $# -ne 1 ]; then
@@ -242,10 +207,13 @@ fi
 echo "######################################################################"
 echo "Title: Checking IP Format/Connectivity"
 echo "######################################################################"
-
 # Validate the provided argument
 input=$1
 validate_ip "$input"
 live_ip "$input"
+echo "######################################################################"
+echo "Description: Verifying the Format of IP and connectivity"
+echo "######################################################################"
+echo "Mitigation: It is just information gathering, NO mitigation for it"
 
 perform_scan "$input"
