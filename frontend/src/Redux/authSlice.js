@@ -14,11 +14,11 @@ export const login = createAsyncThunk(
         }
       });
 
-      const { userName, token } = response.data;
+      const { userName, token,Roles } = response.data;
       localStorage.setItem('authToken', token);
       localStorage.setItem('UserName', userName);
-
-      return { userName, token };
+      localStorage.setItem('Roles',Roles);
+      return { userName, token , Roles};
     } catch (error) {
       throw error;
     }

@@ -3,7 +3,7 @@ import authReducer from './authSlice';
 import blogsReducer from './blogsSlice'; // Import the blogsSlice reducer
 import commentReducer from './commentSlice';
 import urlScanReducer from "./urlScanFreeSlice";
-import urlScanPReducer from "./urlScanPSlice";
+import urlScanPPSlice from "./urlScanPSlice";
 import networkScanReducer from "./networkFreeSlice";
 import networkPSliceReducer from './networkPslice';
 import messageSliceReducer from './messageSlice';
@@ -15,7 +15,7 @@ const store = configureStore({
     blogs: blogsReducer, 
     comment: commentReducer, 
     urlScan: urlScanReducer,
-    urlPscan: urlScanPReducer,
+    urlPscan: urlScanPPSlice,
     networkScan: networkScanReducer,
     networkPScan: networkPSliceReducer,
     message:messageSliceReducer,

@@ -1,34 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-
-const userIsPremium = true; 
-
-export const scanPrUrl = createAsyncThunk(
-  'urlScan/scanUrl',
+import { axiosInstance } from './axios-instance';
+export const urlScanPSlice = createAsyncThunk(
+  'urlScanPSlice/urlScanPSlice',
   async (url) => {
-    if (!userIsPremium) {
-     
-      throw new Error('Premium account required for scanning');
-    }
-
     try {
-      const response = await fetch('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Scan/PremiumWebScan', {
-        method: 'POST',
+      const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Scan/FreeWebScan', {
+        url
+      }, {
         headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url })
+          'Content-Type': 'application/json',
+         
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-
-      const data = await response.json();
-      
-      return data;
+      return response.data;
     } catch (error) {
-     
       throw error;
     }
   }
@@ -40,25 +26,25 @@ const initialState = {
   error: null
 };
 
-const urlScanPSlice = createSlice({
+const urlScanPPSlice= createSlice({
   name: 'urlScan',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(scanPrUrl.pending, (state) => {
+      .addCase(urlScanPSlice.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(scanPrUrl.fulfilled, (state, action) => {
+      .addCase(urlScanPSlice.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.result = action.payload;
       })
-      .addCase(scanPrUrl.rejected, (state, action) => {
+      .addCase(urlScanPSlice.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   }
 });
 
-export default urlScanPSlice.reducer;
+export default urlScanPPSlice.reducer;

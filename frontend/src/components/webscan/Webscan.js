@@ -8,17 +8,16 @@ import { scanUrl } from "../../Redux/urlScanFreeSlice";
 import Swal from "sweetalert2";
 
 function Webscan() {
-
-
   const getTargetElement = () => document.getElementById('table-id');
-
   const dispatch = useDispatch();
   const [url, setUrl] = useState("");
   const result = useSelector((state) => state.urlScan.result);
   const status = useSelector((state) => state.urlScan.status);
   const error = useSelector((state) => state.urlScan.error);
   const token = useSelector((state) => state.auth.token);
-  console.log(typeof result)
+  const usertype = useSelector(state => state.auth);
+  console.log(usertype);
+  // console.log(typeof result)
   const options = {
     // default is Resolution.MEDIUM = 3, which should be enough, higher values
     // increases the image quality but also the size of the PDF, so be careful
