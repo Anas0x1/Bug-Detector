@@ -6,7 +6,8 @@ export const scanNetwork = createAsyncThunk(
   async (url) => {
     try {
       // const response = await axiosInstance.post("https://localhost:7268/api/Scan/FreeNetworkScan", {
-      const response = await axiosInstance.post("https://localhost:5220/api/Scan/FreeNetworkScan", {
+      // const response = await axiosInstance.post("https://localhost:5220/api/Scan/FreeNetworkScan", {
+      const response = await axiosInstance.post("https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Scan/FreeNetworkScan", {
         url
       }, {
         headers: {

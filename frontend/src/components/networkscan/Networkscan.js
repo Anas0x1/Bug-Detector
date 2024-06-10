@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scanNetwork } from '../../Redux/networkFreeSlice';
-import { scanPremiumNetwork } from '../../Redux/networkPslice'
+import { scanPremiumNetwork } from '../../Redux/networkPslice';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import moment from 'moment';
 
@@ -17,6 +17,7 @@ function Networkscan() {
   const error = useSelector((state) => state.networkScan.error);
   const result = useSelector((state) => state.networkScan.result);
   const token = useSelector(state => state.auth.token);
+  const type = useSelector(state => state.auth.type);
 
   const options = {
     // default is Resolution.MEDIUM = 3, which should be enough, higher values
@@ -80,20 +81,33 @@ function Networkscan() {
           value={url} onChange={(e) => setUrl(e.target.value)}
         />
 
-        <div className="btn-group" style={{ marginLeft: "10px" }}>
-          <button
+        {type === 'FreeUser' &&
+          <div className="btn-group" style={{ marginLeft: "10px" }}>
+            <button
 
-            className="btn btn-success "
-            type="submit"
-            onClick={handleSubmit}
-            style={{ width: "100px", maxWidth: "100px" }}
-          >
-            Scan
-          </button>
+              className="btn btn-success "
+              type="submit"
+              onClick={handleSubmit}
+              style={{ width: "100px", maxWidth: "100px" }}
+            >
+              Scan
+            </button>
+          </div>
+        }
 
+        {type === 'PremiumUser' &&
+          <div className="btn-group" style={{ marginLeft: "10px" }}>
+            <button
 
-
-        </div>
+              className="btn btn-success "
+              type="submit"
+              onClick={handleSubmitPremium}
+              style={{ width: "100px", maxWidth: "100px" }}
+            >
+              Scan
+            </button>
+          </div>
+        }
 
         <div className="input-group-append" style={{ marginLeft: "10px" }}>
           <button
@@ -233,21 +247,24 @@ function Networkscan() {
           <div className="table-responsive-sm" >
 
             <table className="table table-striped table-hover" >
-            <thead>
+              <thead>
                 <tr>
                   <th scope="col" style={{ color: "red" }} >Title</th>
                   <th scope="col" style={{ color: "red" }} >Description</th>
                   <th scope="col" style={{ color: "red" }} >Output</th>
+                  <th scope="col" style={{ color: "red" }} >Mitigation</th>
                 </tr>
               </thead>
               <tbody >
-                {result.result ? result.result.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.title && item.title.replaceAll("<br>", "")}</td>
-                    <td>{item.details && item.details.replaceAll("<br>", "\n")}</td>
-                    <td>{item.output && item.output.replaceAll("<br>", "")}</td>
+                {result.result ? Object.keys(result.result.result).map(key => (
+                  <tr key={key}>
+                    <td>{result.result.result[key].title && result.result.result[key].title.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result.result[key].details && result.result.result[key].details.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result.result[key].output && result.result.result[key].output.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result.result[key].mitigation && result.result.result[key].mitigation.replaceAll("<br>", "\n")}</td>
                   </tr>
                 )) : <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

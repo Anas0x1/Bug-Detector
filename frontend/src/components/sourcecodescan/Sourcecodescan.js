@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import moment from 'moment';
-
+import './sourceodescan.css';
 import { sourcecodeURL } from "../../Redux/sourcecodescan";
 import Swal from "sweetalert2";
 
@@ -18,7 +18,7 @@ export default function Sourcecodescan() {
   const status = useSelector((state) => state.sourcecodeURL.status);
   const error = useSelector((state) => state.sourcecodeURL.error);
   const token = useSelector((state) => state.auth.token);
-  console.log(typeof result)
+
   const options = {
     // default is Resolution.MEDIUM = 3, which should be enough, higher values
     // increases the image quality but also the size of the PDF, so be careful
@@ -246,23 +246,26 @@ export default function Sourcecodescan() {
           </div>
         )}
         {status === "succeeded" && (
-          <div className='table-responsive-sm' id="table-id" style={{width:"90%"}}>
+          <div className='table-responsive-sm' id="table-id" style={{ width: "90%" }}>
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th scope="col" style={{ color: "red" }} >Title</th>
-                  <th scope="col" style={{ color: "red" }} >Description</th>
-                  <th scope="col" style={{ color: "red" }} >Output</th>
+                  <th scope="col" style={{ color: "red" }} >Filepath</th>
+                  <th scope="col" style={{ color: "red" }} >Injected Function</th>
+                  <th scope="col" style={{ color: "red" }} >Mitigation Function</th>
+                  <th scope="col" style={{ color: "red" }} >Explanation</th>
                 </tr>
               </thead>
               <tbody>
-                {result.result ? result.result.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.title && item.title.replaceAll("<br>", "")}</td>
-                    <td>{item.details && item.details.replaceAll("<br>", "\n")}</td>
-                    <td>{item.output && item.output.replaceAll("<br>", "")}</td>
+                {result ? Object.keys(result.result).map(key => (
+                  <tr key={key}>
+                    <td id="filepath">{result.result[key].filepath && result.result[key].filepath.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result[key].injectedFunction && result.result[key].injectedFunction.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result[key].mitigationFunction && result.result[key].mitigationFunction.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result[key].explanation && result.result[key].explanation.replaceAll("<br>", "\n")}</td>
                   </tr>
                 )) : <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

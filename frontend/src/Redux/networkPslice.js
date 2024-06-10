@@ -1,31 +1,27 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { axiosInstance } from './axios-instance';
 
 export const scanPremiumNetwork = createAsyncThunk(
-  'networkPScan/scan',
+  'networkScan/scan',
   async (url) => {
     try {
-      const response = await fetch("https://localhost:5220/api/Scan/PremiumNetworkScan", {
-        method: 'POST',
+      // const response = await axiosInstance.post("https://localhost:7268/api/Scan/PremiumNetworkScan", {
+      // const response = await axiosInstance.post("https://localhost:5220/api/Scan/PremiumNetworkScan", {
+      const response = await axiosInstance.post("https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Scan/PremiumNetworkScan", {
+        url
+      }, {
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url })
+        }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-
-      const data = await response.json();
-      
-      return data;
+      return response.data;
     } catch (error) {
       throw error;
     }
   }
 );
-
 const initialState = {
   result: null,
   status: 'idle',

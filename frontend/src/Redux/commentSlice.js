@@ -9,7 +9,7 @@ export const addNewComment = createAsyncThunk(
         try {
             // const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Comment/AddComment', commentData);
             // const response = await axiosInstance.post('https://localhost:7268/api/Comment/AddComment', commentData);
-            const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Comment/AddComment', commentData);
+            const response = await axiosInstance.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Comment/AddComment', commentData);
             return response.data;
         } catch (error) {
             throw error;
@@ -22,7 +22,7 @@ export const addCommentLike = createAsyncThunk(
         try {
             // const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Comment/Like', commentid);
             // const response = await axiosInstance.post('https://localhost:7268/api/Comment/Like', commentid);
-            const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Comment/Like', commentid);
+            const response = await axiosInstance.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Comment/Like', commentid);
             return response.data;
         } catch (error) {
             throw error;
@@ -37,7 +37,7 @@ export const deleteComment = createAsyncThunk(
             console.log(commentData)
             // const response = await axiosInstance.delete('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Comment/DeleteComment',
             // const response = await axiosInstance.delete('https://localhost:7268/api/Comment/DeleteComment',
-            const response = await axiosInstance.delete('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Comment/DeleteComment',
+            const response = await axiosInstance.delete('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Comment/DeleteComment',
                 { data: { blogId: commentData.blogid,commentId: commentData.commentid} }
             );
             return response.data;
@@ -52,7 +52,7 @@ export const addCommentDislike = createAsyncThunk(
         try {
             // const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Comment/DisLike', commentid);
             // const response = await axiosInstance.post('https://localhost:7268/api/Comment/DisLike', commentid);
-            const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Comment/DisLike', commentid);
+            const response = await axiosInstance.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Comment/DisLike', commentid);
             return response.data;
         } catch (error) {
             throw error;
@@ -65,7 +65,7 @@ export const fetchAllComment = createAsyncThunk(
         try {
             // const response = await axiosInstance.post('https://expert-couscous-r4gvggj5jg993wwrr-5220.app.github.dev/api/Comment/ReturnCommentsForBlog', blogId);
             // const response = await axiosInstance.post('https://localhost:7268/api/Comment/ReturnCommentsForBlog', blogId);
-            const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Comment/ReturnCommentsForBlog', blogId);
+            const response = await axiosInstance.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Comment/ReturnCommentsForBlog', blogId);
             return response.data;
         } catch (error) {
             throw error;

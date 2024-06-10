@@ -37,7 +37,7 @@ function App() {
             <Route path="/scanner/network" element={<Networkpage />} />
             <Route path="/scanner/web" element={<Webpage />} />
             <Route path="/scanner/sourcecode" element={<Sourcecode />} />
-            <Route path="/report/:reportId" element={<ReportPage />} />
+            <Route path="/report/:reportId/:type" element={<ReportPage />} />
             <Route path="/useraccount" element={<UserAccount />} />
             <Route path="/pricing/payment" element={<PaymentCard />} />
             <Route path="/readblog/:blogId" element={<Read />} />

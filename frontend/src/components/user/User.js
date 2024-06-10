@@ -43,10 +43,6 @@ function User() {
 
         <h2 style={{ color: "white" }}>Scans</h2>
         <Link to="/scanner" className="btn btn-warning me-3" id="btn-scan" ><i className="fa-solid fa-plus"></i> New Scan </Link>
-
-        <Link className="btn-cadastre-se btn btn-info text-dark" to={"/changepassword"} >
-          <i className="fa-solid fa-arrow-rotate-right me-1"></i>Change Password
-        </Link>
         <table className="mb-3 table align-middle mb-0 bg-white" style={{ marginTop: "10px" }}>
           <thead className="bg-light">
             <tr>
@@ -83,7 +79,7 @@ function User() {
                   </td>
                   <td>{moment(report.dateTime).format('MMMM Do YYYY, h:mm:ss a')}</td>
                   <td>
-                    <Link to={"/report/" + report.reportId} className="" ><i className="fa-solid fa-angles-right text-info"></i></Link>
+                    <Link to={`/report/${report.reportId}/${report.type}`} className="" ><i className="fa-solid fa-angles-right text-info"></i></Link>
                   </td>
                 </tr>
               ))

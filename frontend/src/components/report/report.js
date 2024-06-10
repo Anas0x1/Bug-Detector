@@ -13,15 +13,14 @@ function Report() {
     const loading = useSelector((state) => selectReportsLoading(state));
     const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
-    console.log("report")
-    console.log(report)
-    console.log(typeof report)
 
-    const reportId = useParams();
-    console.log(reportId)
+    const reportId = useParams().reportId;
+    const type = useParams().type;
+
     useEffect(() => {
-        dispatch(getReport({ id: reportId.reportId }));
+        dispatch(getReport({ id: reportId }));
     }, [reportId, dispatch]);
+
     const options = {
         // default is Resolution.MEDIUM = 3, which should be enough, higher values
         // increases the image quality but also the size of the PDF, so be careful
@@ -39,28 +38,55 @@ function Report() {
             {!loading ? <div className='container' style={{ marginTop: "8%", minHeight: "100hv" }}>
                 <div className='row'>
                     <div id='table-id' className='table-responsive bg-light rounded-3 p-5'>
-                        <table className="table table-striped table-hover">
+                        {type === 'SourceCodeScan' ? <table className="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" style={{ color: "red" }} >Title</th>
-                                    <th scope="col" style={{ color: "red" }} >Description</th>
-                                    <th scope="col" style={{ color: "red" }} >Output</th>
+                                    <th scope="col" style={{ color: "red" }} >Filepath</th>
+                                    <th scope="col" style={{ color: "red" }} >Injected Function</th>
+                                    <th scope="col" style={{ color: "red" }} >Mitigation Function</th>
+                                    <th scope="col" style={{ color: "red" }} >Explanation</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {report.result ? report.result.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.title && item.title.replaceAll("<br>", "")}</td>
-                                        <td>{item.details && item.details.replaceAll("<br>", "\n")}</td>
-                                        <td>{item.output && item.output.replaceAll("<br>", "")}</td>
+                                {report.result ? Object.keys(report.result.result).map(key =>
+                                    <tr key={key}>
+                                        <td id="filepath">{report.result.result[key].filepath && report.result.result[key].filepath.replaceAll("<br>", "\n")}</td>
+                                        <td>{report.result.result[key].injectedFunction && report.result.result[key].injectedFunction.replaceAll("<br>", "\n")}</td>
+                                        <td>{report.result.result[key].mitigationFunction && report.result.result[key].mitigationFunction.replaceAll("<br>", "\n")}</td>
+                                        <td>{report.result.result[key].explanation && report.result.result[key].explanation.replaceAll("<br>", "\n")}</td>
                                     </tr>
-                                )) : <tr>
+                                ) : <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>}
                             </tbody>
-                        </table>
+                        </table> : <table className="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style={{ color: "red" }} >Title</th>
+                                    <th scope="col" style={{ color: "red" }} >Description</th>
+                                    <th scope="col" style={{ color: "red" }} >Output</th>
+                                    <th scope="col" style={{ color: "red" }} >Mitigation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {report.result ? Object.keys(report.result.result).map(key =>
+                                    <tr key={key}>
+                                        <td>{report.result.result[key].title && report.result.result[key].title.replaceAll("<br>", "\n")}</td>
+                                        <td>{report.result.result[key].details && report.result.result[key].details.replaceAll("<br>", "\n")}</td>
+                                        <td>{report.result.result[key].output && report.result.result[key].output.replaceAll("<br>", "\n")}</td>
+                                        <td>{report.result.result[key].mitigation && report.result.result[key].mitigation.replaceAll("<br>", "\n")}</td>
+                                    </tr>
+                                ) : <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>}
+                            </tbody>
+                        </table>}
+
                     </div>
                 </div>
                 {(report.result) &&

@@ -6,7 +6,8 @@ export const sourcecodeURL = createAsyncThunk(
   async (url) => {
     try {
    
-      const response = await axiosInstance.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/SourceCodeScan/SourceCodeScan', {
+      // const response = await axiosInstance.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/SourceCodeScan/SourceCodeScan', {
+      const response = await axiosInstance.post('https://localhost:7268/api/SourceCodeScan/SourceCodeScan', {
         url
       }, {
         headers: {
@@ -40,7 +41,7 @@ const SourcecodeURL = createSlice({
       })
       .addCase(sourcecodeURL.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.result = action.payload;
+        state.result = action.payload.result;
       })
       .addCase(sourcecodeURL.rejected, (state, action) => {
         state.status = 'failed';

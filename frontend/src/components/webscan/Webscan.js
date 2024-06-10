@@ -5,19 +5,23 @@ import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import moment from 'moment';
 
 import { scanUrl } from "../../Redux/urlScanFreeSlice";
+import { scanPrUrl } from "../../Redux/urlScanPSlice";
 import Swal from "sweetalert2";
 
 function Webscan() {
+
+
   const getTargetElement = () => document.getElementById('table-id');
+
   const dispatch = useDispatch();
   const [url, setUrl] = useState("");
   const result = useSelector((state) => state.urlScan.result);
   const status = useSelector((state) => state.urlScan.status);
   const error = useSelector((state) => state.urlScan.error);
   const token = useSelector((state) => state.auth.token);
-  const usertype = useSelector(state => state.auth);
-  console.log(usertype);
-  // console.log(typeof result)
+  const type = useSelector(state => state.auth.type);
+
+
   const options = {
     // default is Resolution.MEDIUM = 3, which should be enough, higher values
     // increases the image quality but also the size of the PDF, so be careful
@@ -34,6 +38,46 @@ function Webscan() {
     if (token) {
       if (url)
         dispatch(scanUrl(url));
+      else {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "info",
+          title: "Enter a URL or Domain",
+        });
+      }
+
+    } else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "info",
+        title: "Login first",
+      });
+    }
+  };
+  const handlePremiumScanUrl = () => {
+    if (token) {
+      if (url)
+        dispatch(scanPrUrl(url));
       else {
         const Toast = Swal.mixin({
           toast: true,
@@ -96,16 +140,32 @@ function Webscan() {
             onChange={(e) => setUrl(e.target.value)}
           />
 
-          <div className="btn-group" style={{ marginLeft: "10px" }}>
-            <button
-              type="button"
-              className="btn btn-success"
-              onClick={handleScanUrl}
-              style={{ width: "100px", maxWidth: "100px" }}
-            >
-              Scan
-            </button>
-          </div>
+          {type === "FreeUser" &&
+            <div className="btn-group" style={{ marginLeft: "10px" }}>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={handleScanUrl}
+                style={{ width: "100px", maxWidth: "100px" }}
+              >
+                Scan
+              </button>
+            </div>
+          }
+
+          {type === "PremiumUser" &&
+            <div className="btn-group" style={{ marginLeft: "10px" }}>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={handlePremiumScanUrl}
+                style={{ width: "100px", maxWidth: "100px" }}
+              >
+                Scan
+              </button>
+            </div>
+          }
+
 
           {token && <div className="input-group-append" style={{ marginLeft: "10px" }}>
             <button
@@ -245,23 +305,26 @@ function Webscan() {
           </div>
         )}
         {status === "succeeded" && (
-          <div className='table-responsive-sm' id="table-id" style={{width:"90%"}}>
+          <div className='table-responsive-sm' id="table-id" style={{ width: "90%" }}>
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
                   <th scope="col" style={{ color: "red" }} >Title</th>
                   <th scope="col" style={{ color: "red" }} >Description</th>
                   <th scope="col" style={{ color: "red" }} >Output</th>
+                  <th scope="col" style={{ color: "red" }} >Mitigation</th>
                 </tr>
               </thead>
-              <tbody>
-                {result.result ? result.result.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.title && item.title.replaceAll("<br>", "")}</td>
-                    <td>{item.details && item.details.replaceAll("<br>", "\n")}</td>
-                    <td>{item.output && item.output.replaceAll("<br>", "")}</td>
+              <tbody >
+                {result.result ? Object.keys(result.result.result).map(key => (
+                  <tr key={key}>
+                    <td>{result.result.result[key].title && result.result.result[key].title.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result.result[key].details && result.result.result[key].details.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result.result[key].output && result.result.result[key].output.replaceAll("<br>", "\n")}</td>
+                    <td>{result.result.result[key].mitigation && result.result.result[key].mitigation.replaceAll("<br>", "\n")}</td>
                   </tr>
                 )) : <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

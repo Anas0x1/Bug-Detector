@@ -1,7 +1,7 @@
 import "./nav.css";
 import User from "./user.png";
 import bug from "./boxelder-bug.png";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../Redux/authSlice';
@@ -10,8 +10,10 @@ function Nav() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.token);
   const userName = useSelector(state => state.auth.user);
+  const type = useSelector(state => state.auth.type);
   const navigate = useNavigate();
 
+  console.log(type)
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
@@ -43,12 +45,18 @@ function Nav() {
                 <Link to="/contectus" className="nav-link text-white" target="blank">Contact us</Link>
               </li>
             </ul>
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav align-items-center mx-auto mb-2 mb-lg-0">
               {user ? (
                 <>
+                  {type === 'PremiumUser' &&
+                    <li className="nav-item">
+                      <div className="nav-link me-0 pe-0"><i className="fa-solid fa-crown" style={{ color: '#FFD43B' }}></i></div>
+                    </li>
+                  }
                   <li className="nav-item text-light">
-                    <div className="nav-link text-white"><em>Welcome {userName}</em></div>
+                    <div className="nav-link text-white"><em>{userName}</em></div>
                   </li>
+
                   <li className="nav-item" style={{ marginRight: "10px" }}>
                     <button className="nav-link text-white" onClick={handleLogout} style={{ color: "yellow" }}>Logout</button>
                   </li>
@@ -57,6 +65,25 @@ function Nav() {
                     <Link to="/useraccount">
                       <img src={User} alt="/" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
                     </Link>
+                  </li>
+                  <li className="ms-3 nav-item dropdown">
+                    <a className="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i className="text-light fs-3 fa-solid fa-ellipsis"></i>
+                    </a>
+                    <ul className="dropdown-menu">
+                      {type === 'PremiumUser' &&
+                        <li><span className="text-center dropdown-item">Premium User</span></li>
+                      }
+                      {type === 'FreeUser' &&
+                        <li><span className="text-center dropdown-item">Free User</span></li>
+                      }
+                      <li><hr class="dropdown-divider" /></li>
+                      <li>
+                        <Link className="text-center dropdown-item" to={"/changepassword"} >
+                          Change Password
+                        </Link>
+                      </li>
+                    </ul>
                   </li>
                 </>
               )

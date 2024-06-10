@@ -9,8 +9,8 @@ const Blogs = () => {
 
     const dispatch = useDispatch();
 
-    const user = useSelector(state => state.auth.token);
     const userName = useSelector(state => state.auth.user);
+
     const blogs = useSelector((state) => selectAllBlogs(state));
     const token = useSelector((state) => state.auth.token);
     let Like = <i className="fa-regular fa-thumbs-up"></i>;
@@ -155,14 +155,16 @@ const Blogs = () => {
                     filteredBlogs.length > 0 ? (
                         filteredBlogs.map((blog, index) => (
                             <div className='mt-3 me-4' key={index}>
-                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} name={userName} />
+                                <BlogCard date={blog.publicationDate} title={blog.title} content={blog.content} id={blog.id} />
                                 <span className='me-2' onClick={(e) => handleLike(blog.id, e)} style={{ color: "blue" }}>{Like}</span>
                                 <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
                                 <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
                                 <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
-                                <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
-                                    <i className="fa-solid fa-trash mx-2"></i>
-                                </span>
+                                {userName == blog.usrName &&
+                                    <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
+                                        <i className="fa-solid fa-trash mx-2"></i>
+                                    </span>
+                                }
                             </div>))
                     ) : (
                         <div className='text-light mx-auto display-6'>No blogs found for the search term</div>
@@ -176,9 +178,11 @@ const Blogs = () => {
                                 <span className='me-2' style={{ color: "white" }}>{blog.numberOfLikes}</span>
                                 <span className='me-2' onClick={(e) => handleDislike(blog.id, e)} style={{ color: "red" }}>{disLike}</span>
                                 <span style={{ color: "white" }}>{blog.numberOfDisLikes}</span>
-                                <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
-                                    <i className="fa-solid fa-trash mx-2"></i>
-                                </span>
+                                {userName == blog.usrName &&
+                                    <span onClick={(e) => handleDelete(blog.id, e)} className="link-muted link-muted2">
+                                        <i className="fa-solid fa-trash mx-2"></i>
+                                    </span>
+                                }
                             </div>
                         ))
                     ) : (

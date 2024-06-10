@@ -7,18 +7,19 @@ export const login = createAsyncThunk(
   'auth/login',
   async (credentials) => {
     try {
-      const response = await axios.post("https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Account/Login", credentials, {
-      // const response = await axios.post("https://localhost:7268/api/Account/Login", credentials, {
+      // const response = await axios.post("https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Account/Login", credentials, {
+      const response = await axios.post("https://localhost:7268/api/Account/Login", credentials, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
 
-      const { userName, token,Roles } = response.data;
+      const { userName, token, roles } = response.data;
       localStorage.setItem('authToken', token);
       localStorage.setItem('UserName', userName);
-      localStorage.setItem('Roles',Roles);
-      return { userName, token , Roles};
+      localStorage.setItem('Roles', roles);
+
+      return { userName, token };
     } catch (error) {
       throw error;
     }
@@ -29,8 +30,8 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData) => {
     try {
-      const response = await axios.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Account/Register', userData, {
-      // const response = await axios.post('https://localhost:7268/api/Account/Register', userData, {
+      const response = await axios.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Account/Register', userData, {
+        // const response = await axios.post('https://localhost:7268/api/Account/Register', userData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -66,9 +67,9 @@ export const forgetpassword = createAsyncThunk(
   'auth/forgetpassword',
   async (userData) => {
     try {
-      // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/Register', userData, {
-      // const response = await axios.post('https://localhost:7268/api/Account/ForgotPassword', userData, {
-      const response = await axios.post('http://localhost:5220/api/Account/ForgotPassword', userData, {
+      const response = await axios.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Account/Register', userData, {
+        // const response = await axios.post('https://localhost:7268/api/Account/ForgotPassword', userData, {
+        // const response = await axios.post('http://localhost:5220/api/Account/ForgotPassword', userData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -87,7 +88,7 @@ export const generateOTP = createAsyncThunk(
     try {
       // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
       // const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTP', { email }, {
-      const response = await axios.post('https://laughing-halibut-x5wqwwjg6jqq249j-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+      const response = await axios.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -105,9 +106,9 @@ export const generateOTPforForgetPassword = createAsyncThunk(
   'auth/generateOTPforForgetPassword',
   async (email) => {
     try {
-      // const response = await axios.post('https://glowing-doodle-xq4xv4qrp6w2699p-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
-      // const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTPForForgotPassword', { email }, {
-      const response = await axios.post('http://localhost:5220/api/Account/GenerateAnOTPForForgotPassword', { email }, {
+      const response = await axios.post('https://musical-dollop-gwp67pwxp67cpgj7-5220.app.github.dev/api/Account/GenerateAnOTP', { email }, {
+        // const response = await axios.post('https://localhost:7268/api/Account/GenerateAnOTPForForgotPassword', { email }, {
+        // const response = await axios.post('http://localhost:5220/api/Account/GenerateAnOTPForForgotPassword', { email }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -125,6 +126,7 @@ const authSlice = createSlice({
   initialState: {
     user: localStorage.getItem('UserName'),
     token: localStorage.getItem('authToken'),
+    type: localStorage.getItem('Roles'),
     loading: false,
     error: null
   },
@@ -134,6 +136,7 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem('authToken');
       localStorage.removeItem('UserName');
+      localStorage.removeItem('Roles');
     }
   },
   extraReducers: (builder) => {
