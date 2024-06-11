@@ -247,32 +247,66 @@ export default function Sourcecodescan() {
         )}
         {status === "succeeded" && (
           <div className='table-responsive-sm' id="table-id" style={{ width: "90%" }}>
-            <table className="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" style={{ color: "red" }} >Filepath</th>
-                  <th scope="col" style={{ color: "red" }} >Injected Function</th>
-                  <th scope="col" style={{ color: "red" }} >Mitigation Function</th>
-                  <th scope="col" style={{ color: "red" }} >Explanation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {result ? Object.keys(result.result).map(key => (
-                  <tr key={key}>
-                    <td id="filepath">{result.result[key].filepath && result.result[key].filepath.replaceAll("<br>", "\n")}</td>
-                    <td>{result.result[key].injectedFunction && result.result[key].injectedFunction.replaceAll("<br>", "\n")}</td>
-                    <td>{result.result[key].mitigationFunction && result.result[key].mitigationFunction.replaceAll("<br>", "\n")}</td>
-                    <td>{result.result[key].explanation && result.result[key].explanation.replaceAll("<br>", "\n")}</td>
+          <table className="table table-striped table-hover">
+            <thead>
+              <tr>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {result ? Object.keys(result.result).map(key => (
+                <tr key={key}>
+                  <tr>
+                    <td colSpan="2">
+                      <h2 class='headers' style={{ color: "red", textAlign: "center" }}>Filepath</h2>
+                    </td>
                   </tr>
-                )) : <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>}
-              </tbody>
-            </table>
-          </div>
+                  
+                  <tr id="filepath">
+                    <pre>
+                      {result.result[key].filepath && result.result[key].filepath}
+                    </pre>
+                  </tr>
+                  <tr>
+                    <td colSpan="2">
+                      <h2 class='headers' style={{ color: "red", textAlign: "center" }}>Vulnerable Function</h2>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colSpan="2">
+                      <pre>
+                        {result.result[key].injectedFunction && result.result[key].injectedFunction}
+                      </pre>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan="2">
+                      <h2 class='headers' style={{ color: "red", textAlign: "center" }}>Mitigation Function</h2>
+                    </td>
+                  </tr>
+                  <tr>
+                    <pre>
+                      {result.result[key].mitigationFunction && result.result[key].mitigationFunction}
+                    </pre>
+                  </tr>
+                  <tr>
+                    <td colSpan="2">
+                      <h2 class='headers' style={{ color: "red", textAlign: "center" }}>Explanation</h2>
+                    </td>
+                  </tr>
+                  <tr>{result.result[key].explanation && result.result[key].explanation}</tr>
+                </tr>
+              )) : <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>}
+            </tbody>
+          </table>
+        </div>
+        
           // <div className="mx-auto mt-3" style={{ width: "80%" }}>
           //   <div className="table-responsive-sm ">
           //     <table className="table table-sm table-striped" >
@@ -339,5 +373,3 @@ export default function Sourcecodescan() {
     </>
   );
 }
-
-
