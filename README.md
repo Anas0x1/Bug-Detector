@@ -1,5 +1,9 @@
 # Bug-Detector
 It's a vulnerability assessment web application that helps penetration testers in scanning web, network, and source code review 
+and having a blog section that the user can put his blog or react to other blogs with comments or likes and dislike  
+
+# Demo
+
 
 # Installation
 ```
