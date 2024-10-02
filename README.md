@@ -3,7 +3,11 @@ It's a vulnerability assessment web application that helps penetration testers i
 and having a blog section that the user can put his blog or react to other blogs with comments or likes and dislike  
 
 # Demo
-[Watch the video]([path-to-your-video.mp4](https://github.com/Anas0x1/Bug-Detector/blob/main/20240302_031552.mp4))
+<video width="640" height="360" controls>
+  <source src="[your-video-file.mp4](https://github.com/Anas0x1/Bug-Detector/blob/main/20240302_031552.mp4)" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 
 
